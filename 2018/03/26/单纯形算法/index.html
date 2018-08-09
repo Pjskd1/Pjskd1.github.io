@@ -92,13 +92,13 @@
 
 
 
-<meta name="description" content="线性规划(Linear Programming, LP)中的一种常见的经典的算法之一，而单纯型算法就是非常常用的用来解决这个问题的方法之一。 在中学的时候我们曾经简单的接触过线性规划，当时的做法基本上是在二维平面上做出图形，标出可行域，以固定斜率画直线簇。而往往最优解的地方是通过（凸）可行域的顶点。例如：$$\begin{equation}\begin{split}\max&amp;amp; \quad">
+<meta name="description" content="线性规划(Linear Programming, LP)中的一种常见的经典的算法之一，而单纯型算法就是非常常用的用来解决这个问题的方法之一。 在中学的时候我们曾经简单的接触过线性规划，当时的做法基本上是在二维平面上做出图形，标出可行域，以固定斜率画直线簇。而往往最优解的地方是通过（凸）可行域的顶点。例如：$$\begin{aligned}\begin{split}\max&amp;amp; \quad x">
 <meta name="keywords" content="线性规划">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单纯形算法">
 <meta property="og:url" content="http://yoursite.com/2018/03/26/单纯形算法/index.html">
 <meta property="og:site_name" content="Pjskd1&#39;s LOG">
-<meta property="og:description" content="线性规划(Linear Programming, LP)中的一种常见的经典的算法之一，而单纯型算法就是非常常用的用来解决这个问题的方法之一。 在中学的时候我们曾经简单的接触过线性规划，当时的做法基本上是在二维平面上做出图形，标出可行域，以固定斜率画直线簇。而往往最优解的地方是通过（凸）可行域的顶点。例如：$$\begin{equation}\begin{split}\max&amp;amp; \quad">
+<meta property="og:description" content="线性规划(Linear Programming, LP)中的一种常见的经典的算法之一，而单纯型算法就是非常常用的用来解决这个问题的方法之一。 在中学的时候我们曾经简单的接触过线性规划，当时的做法基本上是在二维平面上做出图形，标出可行域，以固定斜率画直线簇。而往往最优解的地方是通过（凸）可行域的顶点。例如：$$\begin{aligned}\begin{split}\max&amp;amp; \quad x">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/03/26/单纯形算法/1.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/03/26/单纯形算法/2.jpg">
@@ -107,10 +107,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/03/26/单纯形算法/5.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/03/26/单纯形算法/6.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/03/26/单纯形算法/7.jpg">
-<meta property="og:updated_time" content="2018-03-27T13:04:02.000Z">
+<meta property="og:updated_time" content="2018-08-09T16:59:14.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单纯形算法">
-<meta name="twitter:description" content="线性规划(Linear Programming, LP)中的一种常见的经典的算法之一，而单纯型算法就是非常常用的用来解决这个问题的方法之一。 在中学的时候我们曾经简单的接触过线性规划，当时的做法基本上是在二维平面上做出图形，标出可行域，以固定斜率画直线簇。而往往最优解的地方是通过（凸）可行域的顶点。例如：$$\begin{equation}\begin{split}\max&amp;amp; \quad">
+<meta name="twitter:description" content="线性规划(Linear Programming, LP)中的一种常见的经典的算法之一，而单纯型算法就是非常常用的用来解决这个问题的方法之一。 在中学的时候我们曾经简单的接触过线性规划，当时的做法基本上是在二维平面上做出图形，标出可行域，以固定斜率画直线簇。而往往最优解的地方是通过（凸）可行域的顶点。例如：$$\begin{aligned}\begin{split}\max&amp;amp; \quad x">
 <meta name="twitter:image" content="http://yoursite.com/2018/03/26/单纯形算法/1.jpg">
 
 
@@ -433,7 +433,7 @@
 
       
         <p>线性规划(Linear Programming, LP)中的一种常见的经典的算法之一，而单纯型算法就是非常常用的用来解决这个问题的方法之一。</p>
-<p>在中学的时候我们曾经简单的接触过线性规划，当时的做法基本上是在二维平面上做出图形，标出可行域，以固定斜率画直线簇。而往往最优解的地方是通过（凸）可行域的顶点。例如：<br>$$<br>\begin{equation}<br>\begin{split}<br>\max&amp; \quad x_3+x_4 \<br>s.t.&amp; \quad -x_3+2x_4\leq 2 \<br>&amp;\quad 3x_3-2x_4\leq 6 \<br>&amp;\quad x_3, x_4\geq 0<br>\end{split}<br>\end{equation}<br>$$<br>在二维平面上做可行域，在平面（4,3）点处可以取得目标函数最大值。</p>
+<p>在中学的时候我们曾经简单的接触过线性规划，当时的做法基本上是在二维平面上做出图形，标出可行域，以固定斜率画直线簇。而往往最优解的地方是通过（凸）可行域的顶点。例如：<br>$$<br>\begin{aligned}<br>\begin{split}<br>\max&amp; \quad x_3+x_4 \\<br>s.t.&amp; \quad -x_3+2x_4\leq 2 \\<br>&amp;\quad 3x_3-2x_4\leq 6 \\<br>&amp;\quad x_3, x_4\geq 0<br>\end{split}<br>\end{aligned}<br>$$<br>在二维平面上做可行域，在平面（4,3）点处可以取得目标函数最大值。</p>
 <p>之后我们将证明：最优解一定是可行域（凸超几何体）的顶点之一。先假设这个成立，我们使用“改进-停止”（improve-stopping）的方法，即给定一个可行域的顶点，求值，沿一条边到达下一个顶点，判断是否能够改善解，直到达到停止条件。</p>
 <p>那么</p>
 <ul>
@@ -444,7 +444,7 @@
 </ul>
 <p>当可以解答这些问题了之后，我们就可以大致了解单纯型算法的概要了。</p>
 <a id="more"></a>
-<h2 id="线性规划问题的形式"><a href="#线性规划问题的形式" class="headerlink" title="线性规划问题的形式"></a>线性规划问题的形式</h2><h3 id="一般形式"><a href="#一般形式" class="headerlink" title="一般形式"></a>一般形式</h3><p>$$<br>\begin{equation}<br>\max. \sum^n_{j=1}c_jx_j \<br> s.t.<br> \left{<br>     \begin{aligned}<br>     &amp;\sum^n_{t=1} a_{it}x_t \leq b_i \quad i=1,2,\cdots,m_1 \<br>     &amp;\sum^n_{t=1} a_{jt}x_t = b_j \quad j=m_1+1,\cdots,m_1+m_2 \<br>     &amp;\sum^n_{t=1} a_{kt}x_t \geq b_k \quad k=m_1+m_2+1, \cdots,  m_1+m_2+m_3 \<br>     &amp;x_t\geq 0 \quad t=1,2,\cdots, n<br>     \end{aligned}<br> \right.<br> \end{equation}<br>$$</p>
+<h2 id="线性规划问题的形式"><a href="#线性规划问题的形式" class="headerlink" title="线性规划问题的形式"></a>线性规划问题的形式</h2><h3 id="一般形式"><a href="#一般形式" class="headerlink" title="一般形式"></a>一般形式</h3><p>$$<br>\begin{equation}<br>\max. \sum^n_{j=1}c_jx_j \\<br> s.t.<br> \left\{<br>     \begin{aligned}<br>     &amp;\sum^n_{t=1} a_{it}x_t \leq b_i \quad i=1,2,\cdots,m_1 \\<br>     &amp;\sum^n_{t=1} a_{jt}x_t = b_j \quad j=m_1+1,\cdots,m_1+m_2 \\<br>     &amp;\sum^n_{t=1} a_{kt}x_t \geq b_k \quad k=m_1+m_2+1, \cdots,  m_1+m_2+m_3 \\<br>     &amp;x_t\geq 0 \quad t=1,2,\cdots, n<br>     \end{aligned}<br> \right.<br> \end{equation}<br>$$</p>
 <h3 id="标准形式"><a href="#标准形式" class="headerlink" title="标准形式"></a>标准形式</h3><p>线性规划问题的一般形式缺少不等式约束，而只有等式约束以及变量非负约束的时候称为线性规划问题的标准形式。然而在实际问题中几乎不存在这样完美的约束条件，所以我们在解决问题的时候要将一般形式转换为标准形式。<strong>任意一个线性规划问题可以转换为约束标准型线性规划问题。</strong></p>
 <p>一般线性规划化为标准型：</p>
 <ul>
@@ -453,29 +453,29 @@
 <li><p>若约束不等式为小于等于不等式，可以在等式左端加入非负松弛变量，转变为等式。</p>
 <p>同理，若约束不等式为大于等于不等式，可以在等式左端减去一个非负松弛变量，变为等式。</p>
 </li>
-<li><p>若存在取值无约束的变量，可以转变为两个非负变量的差值，例如：<br>$$<br>\begin{equation}<br>-\infty \leq x_k \leq +\infty \Rightarrow<br>\left{<br>\begin{aligned}<br>x_k = x_m-x_n \<br>x_m,x_n \geq 0 \<br>\end{aligned}<br>\right.<br>\end{equation}<br>$$</p>
+<li><p>若存在取值无约束的变量，可以转变为两个非负变量的差值，例如：<br>$$<br>\begin{equation}<br>-\infty \leq x_k \leq +\infty \Rightarrow<br>\left\{<br>\begin{aligned}<br>x_k = x_m-x_n \\<br>x_m,x_n \geq 0 \\<br>\end{aligned}<br>\right.<br>\end{equation}<br>$$</p>
 </li>
 </ul>
 <h3 id="规范形式"><a href="#规范形式" class="headerlink" title="规范形式"></a>规范形式</h3><p>规范形式就是在标准形式的基础上添加人工变量，以便于在不容易的到初始基可行解的时候获取第一个初始可行解。详情见两阶段单纯型算法（两阶段单纯型算法（Two-Phase Simplex Method）。</p>
 <h2 id="凸多边形的最优解在顶点取得"><a href="#凸多边形的最优解在顶点取得" class="headerlink" title="凸多边形的最优解在顶点取得"></a>凸多边形的最优解在顶点取得</h2><p>下面我们来证明为什么最优解一定在顶点。</p>
-<p>考虑最小化问题，目标函数$\mathbf{c}^T \mathbf{x}$，有一个在可行域内部的最优解$\mathbf{x}^{(0)}$，因为凸多边形内幕任一点都可以表示成顶点的线性组合，即对于顶点$\mathbf{x}^{(k)}, k=1,2,\cdots,n$，有<br>$$<br>\mathbf{x}^{(0)}=\sum_{k=1}^{n}\lambda_k\mathbf{x}^{(k)}, \<br>\sum_{k=1}^n \lambda_k=1<br>$$<br>假设$\mathbf{x}^{(i)}$是所有顶点中使得目标函数$\mathbf{c}^T \mathbf{x}$最小的顶点，那么<br>$$<br>\begin{equation}<br>\begin{split}<br>\mathbf{c}^T\mathbf{x}^{(0)} &amp;= \sum_{k=1}^{n}\lambda_k\mathbf{c}^T\mathbf{x}^{(k)} \<br>&amp;\geq \sum_{k=1}^{n}\lambda_k\mathbf{c}^T\mathbf{x}^{(i)} \<br>&amp;= \mathbf{c}^T\mathbf{x}^{(i)}<br>\end{split}<br>\end{equation}<br>$$<br>因此，总有一个顶点，它的目标函数值不比内部的点差。</p>
+<p>考虑最小化问题，目标函数$\mathbf{c}^T \mathbf{x}$，有一个在可行域内部的最优解$\mathbf{x}^{(0)}$，因为凸多边形内幕任一点都可以表示成顶点的线性组合，即对于顶点$\mathbf{x}^{(k)}, k=1,2,\cdots,n$，有<br>$$<br>\mathbf{x}^{(0)}=\sum_{k=1}^{n}\lambda_k\mathbf{x}^{(k)}, \\<br>\sum_{k=1}^n \lambda_k=1<br>$$<br>假设$\mathbf{x}^{(i)}$是所有顶点中使得目标函数$\mathbf{c}^T \mathbf{x}$最小的顶点，那么<br>$$<br>\begin{equation}<br>\begin{split}<br>\mathbf{c}^T\mathbf{x}^{(0)} &amp;= \sum_{k=1}^{n}\lambda_k\mathbf{c}^T\mathbf{x}^{(k)} \\<br>&amp;\geq \sum_{k=1}^{n}\lambda_k\mathbf{c}^T\mathbf{x}^{(i)} \\<br>&amp;= \mathbf{c}^T\mathbf{x}^{(i)}<br>\end{split}<br>\end{equation}<br>$$<br>因此，总有一个顶点，它的目标函数值不比内部的点差。</p>
 <h2 id="如何得到凸多边形顶点"><a href="#如何得到凸多边形顶点" class="headerlink" title="如何得到凸多边形顶点"></a>如何得到凸多边形顶点</h2><p>下面要说明的定理是：对于可行域方程组$\mathbf{Ax=b}$，该方程确定的凸多边形的任意一个顶点对应$\mathbf{A}$的一组基底。</p>
 <h3 id="顶点对应一组基底"><a href="#顶点对应一组基底" class="headerlink" title="顶点对应一组基底"></a>顶点对应一组基底</h3><p><img src="1.jpg" alt=""></p>
 <p>这个例子是松弛型约束的线性规划，原来的变量有三个分别是x123，加上后面四个变成标准型等式，形成的可行域如上图所示。现在取顶点$(0,2,0)$分析。（在实际问题中，也许没有办法获得起始顶点，这时候要采用大M算法或者两阶段单纯型算法，目前在计算机计算的大规模线性规划问题中，一般使用两阶段单纯型算法）将顶点带入约束中，可以计算得到一个完整解$x=(0，2，0，2，2，3，0)$。取出矩阵A中对应的x不为0的列，即下图中表蓝的几列（用$\mathbf{a}_2, \mathbf{a}_4, \mathbf{a}_5, \mathbf{a}_6$表示），那么这几列就是线性无关的，考虑$m&lt;n$（约束的条件数小于松弛后的变量个数），那么自由解有$n-m$维，因此挑出来的列必有$m$个，构成一组基底。</p>
 <p><strong>下面来证明为什么他们线性无关。</strong>假设它们线性相关，即存在一组$\lambda\neq\mathbf{0}$使得$\lambda_2\mathbf{a}_2+\lambda_4\mathbf{a}_4+\lambda_5\mathbf{a}_5+\lambda_6\mathbf{a}_6=0$，也就是说，可以构造一组$\lambda=[0, \lambda_2, 0, \lambda_4, \lambda_5, \lambda_6, 0]$，使得$\mathbf{A}\lambda=0$。那么还可以再构造两个异于$x$的解：$x’=x+\theta\lambda$和$x’’=x-\theta\lambda$。它们都满足$\mathbf{Ax=b}$。并且可以通过控制$\theta$取得很小的正值，使得这两个解都满足大于0的约束。由此，这两个解都在凸多面体内，并且有$x=\frac{1}{2}(x’+x’’)$，但是这是不完美的，因为一个凸多面体的顶点是不能被内部的点线性表示的，因此这几列是构成一组基底的。</p>
 <p><img src="2.jpg" alt=""></p>
-<p>在这里，我们还可以对每一组解，都将$\mathbf{A}$的列重新排列一下，将解向量也排列一下，写成分块矩阵的形式，因为重新排列之后形成的$\mathbf{x}<em>N = 0$,那么就会有$\mathbf{x}</em>{\mathbf{B}}=\mathbf{B}^{-1}\mathbf{b}$，并且目标函数转化为$\mathbf{c^Tx=c_B^TB^{-1}b}$。这是两个很有用的公式，在后面的单纯型算法的理解上很有帮助。</p>
+<p>在这里，我们还可以对每一组解，都将$\mathbf{A}$的列重新排列一下，将解向量也排列一下，写成分块矩阵的形式，因为重新排列之后形成的$\mathbf{x}_N = 0$ ,那么就会有$\mathbf{x}_{\mathbf{B}}=\mathbf{B}^{-1}\mathbf{b}$，并且目标函数转化为$\mathbf{c^Tx=c_B^TB^{-1}b}$。这是两个很有用的公式，在后面的单纯型算法的理解上很有帮助。</p>
 <p><img src="3.jpg" alt=""></p>
 <h3 id="一组基底对应一个基可行解（顶点）"><a href="#一组基底对应一个基可行解（顶点）" class="headerlink" title="一组基底对应一个基可行解（顶点）"></a>一组基底对应一个基可行解（顶点）</h3><p>有了上面的知识，给定一组基底$\mathbf{B}$，我们直接构造$\mathbf{x}=[\mathbf{B^{-1}b}, \mathbf{0}]^T$，只要说明他不能被两个异于它的内部点线性表示即可。假设有两个内部点$\mathbf{x}_1, \mathbf{x}_2$，满足$\mathbf{x}=\lambda_1\mathbf{x}_1+\lambda_2\mathbf{x}_2$，由于$\mathbf{x}_N=0$，并且这些解的元素都大于等于0，因此$\mathbf{x_1}_{\mathbf{N}}=\mathbf{x_2}_{\mathbf{N}}=0$。而又因为$\mathbf{Ax_1=Ax_2=b}$，因此$\mathbf{x_1}_{\mathbf{B}}=\mathbf{x_2}_{\mathbf{B}}=\mathbf{B^{-1}b}$。即这两个解和x相同，因此x是顶点。</p>
 <h2 id="如何从一个顶点沿边到达另一个顶点"><a href="#如何从一个顶点沿边到达另一个顶点" class="headerlink" title="如何从一个顶点沿边到达另一个顶点"></a>如何从一个顶点沿边到达另一个顶点</h2><p>这里要研究怎么改善一个解，在图形上讲就是如何从一个顶点出发沿着边找到另一个顶点。上一节我们知道了一个顶点对应一组基底，而且一个矩阵的基底有多个，那么是否可以通过基底的变换来使得顶点变换呢。举个例子：</p>
 <p><img src="4.jpg" alt=""></p>
-<p>图中红色点对应的是之前我们拿来举例子的完全解$\mathbf{x}=[2,0,0,2,0,3,6]$，对应的基底是$\mathbf{B}={\mathbf{a}_1，\mathbf{a}_4，\mathbf{a}_6，\mathbf{a}_7}$，考虑向量$\mathbf{a}_3$，即绿色的列，可以表示成：<br>$$<br>\mathbf{a}_3=0\mathbf{a}_1+1\mathbf{a}_4+1\mathbf{a}_6+1\mathbf{a}_7<br>$$<br>补全式子，有<br>$$<br>0\mathbf{a}_1+0\mathbf{a}_2-1\mathbf{a}_3+1\mathbf{a}_4++0\mathbf{a}_5+1\mathbf{a}_6+1\mathbf{a}_7=0<br>$$<br>写出系数：$\lambda=[0,0,-1,1,0,1,1]$，它就是对应上图中的绿色向量（相反方向）。因此只有沿着这个方向走适合的步长$\theta$，就能到达下一个顶点。即新旧顶点的关系为：<br>$$<br>\mathbf{x’}=\mathbf{x}-\theta\mathbf{\lambda}\quad(\theta&gt;0)<br>$$<br>那么多大的$\theta$合适呢？我们很容易知道$\mathbf{x}’$能够满足$\mathbf{Ax=b}$，因为$\mathbf{A\lambda=0}$，现在要保证的就是$\mathbf{x}’$的各个分量大于等于0。<br>$$<br>\because \mathbf{A\lambda=0} \  \&amp; \ \mathbf{x}-\mathbf{x’}=\theta\mathbf{\lambda} \<br>\therefore \lambda = \frac{\mathbf{x}-\mathbf{x’}}{\theta} \ \&amp; \ \mathbf{A} \frac{\mathbf{x}-\mathbf{x’}}{\theta}=0 \<br>\therefore \mathbf{x} = \mathbf{x}’ \ \&amp; \ \mathbf{Ax} = \mathbf{Ax’} = \mathbf{b}<br>$$<br>对于$\lambda_i\leq0$的项，相减之后大于0，满足要求。但是对于$\lambda_i&gt;0$的项，需要小心，因为要保证相减之后仍然大于等于0，我们设：<br>$$<br>\theta=\min\limits_{\mathbf{a}_i\in \mathbf{B},\lambda_i&gt;0}\frac{x_i}{\lambda_i}<br>$$<br>就能保证。在上面的例子中，，所以新的解是$\mathbf{x’}=[2,0,2,0,0,1,4]$，对应的基底是$\mathbf{B’}={\mathbf{a}_1，\mathbf{a}_3，\mathbf{a}_6，\mathbf{a}_7}$，到这里，看似我们找到了运动到下一个顶点的方法，也就是先找一个非基向量，将它写成用基向量表示的形式，提出系数，确定步长，得到新的解。但是还有一个小问题，我们看到实际上$\mathbf{B}’$和$\mathbf{B}$差了一个向量，相当于把$\mathbf{a}_4$换出去，把$\mathbf{a}_3$换进来。我们成这个过程为换基，后面算法实现部分叫pivot。那么怎么保证换完这个向量之后，仍然是基呢？</p>
+<p>图中红色点对应的是之前我们拿来举例子的完全解$\mathbf{x}=[2,0,0,2,0,3,6]$，对应的基底是$\mathbf{B}=\{\mathbf{a}_1，\mathbf{a}_4，\mathbf{a}_6，\mathbf{a}_7\}$，考虑向量$\mathbf{a}_3$，即绿色的列，可以表示成：<br>$$<br>\mathbf{a}_3=0\mathbf{a}_1+1\mathbf{a}_4+1\mathbf{a}_6+1\mathbf{a}_7<br>$$<br>补全式子，有<br>$$<br>0\mathbf{a}_1+0\mathbf{a}_2-1\mathbf{a}_3+1\mathbf{a}_4++0\mathbf{a}_5+1\mathbf{a}_6+1\mathbf{a}_7=0<br>$$<br>写出系数：$\lambda=[0,0,-1,1,0,1,1]$，它就是对应上图中的绿色向量（相反方向）。因此只有沿着这个方向走适合的步长$\theta$，就能到达下一个顶点。即新旧顶点的关系为：<br>$$<br>\mathbf{x’}=\mathbf{x}-\theta\mathbf{\lambda}\quad(\theta&gt;0)<br>$$<br>那么多大的$\theta$合适呢？我们很容易知道$\mathbf{x}’$能够满足$\mathbf{Ax=b}$，因为$\mathbf{A\lambda=0}$，现在要保证的就是$\mathbf{x}’$的各个分量大于等于0。<br>$$<br>\because \mathbf{A\lambda=0}   \&amp;  \mathbf{x}-\mathbf{x’}=\theta\mathbf{\lambda} \\<br>\therefore \lambda = \frac{\mathbf{x}-\mathbf{x’}}{\theta}  \&amp;  \mathbf{A} \frac{\mathbf{x}-\mathbf{x’}}{\theta}=0 \\<br>\therefore \mathbf{x} = \mathbf{x}’  \&amp;  \mathbf{Ax} = \mathbf{Ax’} = \mathbf{b}<br>$$<br>对于$\lambda_i\leq0$的项，相减之后大于0，满足要求。但是对于$\lambda_i&gt;0$的项，需要小心，因为要保证相减之后仍然大于等于0，我们设：<br>$$<br>\theta=\min\limits_{\mathbf{a}_i\in \mathbf{B},\lambda_i&gt;0}\frac{x_i}{\lambda_i}<br>$$<br>就能保证。在上面的例子中，，所以新的解是$\mathbf{x’}=[2,0,2,0,0,1,4]$，对应的基底是$\mathbf{B’}=\{\mathbf{a}_1，\mathbf{a}_3，\mathbf{a}_6，\mathbf{a}_7\}$，到这里，看似我们找到了运动到下一个顶点的方法，也就是先找一个非基向量，将它写成用基向量表示的形式，提出系数，确定步长，得到新的解。但是还有一个小问题，我们看到实际上$\mathbf{B}’$和$\mathbf{B}$差了一个向量，相当于把$\mathbf{a}_4$换出去，把$\mathbf{a}_3$换进来。我们成这个过程为换基，后面算法实现部分叫pivot。那么怎么保证换完这个向量之后，仍然是基呢？</p>
 <p>证明：$\mathbf{B’}=\mathbf{B}-\mathbf{a}_l+\mathbf{a}_e$仍然是基。（l for leave, e for enter）</p>
-<p>假设$\mathbf{B}’$线性相关，<br>那么存在$&lt; d_1,d_2,\cdots,d_{l-1},d_{l+1},\cdots,d_m, d_e &gt; \neq 0$，<br>使得$\sum_{k}  d_k \mathbf{a}_k =0$而$\mathbf{a}<em>e = \sum</em>{i=1}^m \lambda_i \mathbf{a_i}$，带入得到：<br>$$<br>(d_1+d_e\lambda_1)\mathbf{a_1}+\ldots+(d_e\lambda_l)\mathbf{a}_l+\ldots+(d_m+d_e\lambda_m)\mathbf{a}_m=0<br>$$</p>
+<p>假设$\mathbf{B}’$线性相关，<br>那么存在$&lt; d_1,d_2,\cdots,d_{l-1},d_{l+1},\cdots,d_m, d_e &gt; \neq 0$，<br>使得$\sum_{k}  d_k \mathbf{a}_k =0$而$\mathbf{a}_e = \sum_{i=1}^m \lambda_i \mathbf{a_i}$，带入得到：<br>$$<br>(d_1+d_e\lambda_1)\mathbf{a_1}+\ldots+(d_e\lambda_l)\mathbf{a}_l+\ldots+(d_m+d_e\lambda_m)\mathbf{a}_m=0<br>$$</p>
 <p>这里是证明的关键之处：我们在设置$\theta​$的时候的做法，加入最终选出来的使得$\frac{x_i}{\lambda_i}​$最小的那一项下标为p，那么得到的新的解的第p项必然为0，相当于把$\mathbf{a}_p​$换了出去。在上面这个例子中$p=4​$。而因为我们只考虑$\lambda_i&gt;0​$的基向量，因此被换出去的基$\mathbf{a}_l​$对应的$\lambda_l&gt;0​$，因此上式中有$d_1=d_2=\ldots=d_m=d_e=0​$，与原假设矛盾，因此$\mathbf{B’}​$也是线性无关的。</p>
 <p>到这里，我们了解了单纯型算法就是通过反复的及变化呢（通过响亮的进出）来找顶点，从而找到达到最优值的顶点。但是还是有些细节需要考虑，比如，怎么选入基向量？改善（improve）的过程什么时候停止？</p>
 <h2 id="入基向量的选择以及停止准则"><a href="#入基向量的选择以及停止准则" class="headerlink" title="入基向量的选择以及停止准则"></a>入基向量的选择以及停止准则</h2><p>以最小化问题为标准，我们的最终目标是最小化$\mathbf{c^Tx}$，因此一个很自然的贪心想法是每步的改善都尽可能地大，因此可以计算一下更新的目标函数值和原来的差值，取使得变化大的顶点继续下一步迭代。那么这个差值怎么能够向量化地计算呢？只有向量化地计算，才能避免一个一个地计算比较，提高效率。</p>
-<p>假设$\mathbf{B}={\mathbf{a}_1, \mathbf{a}_2,\ldots, \mathbf{a}_m}$，那么对于任何一个非基向量$\mathbf{a}_e$，<br>都有$\mathbf{a}_e=\lambda_1\mathbf{a}_1+\ldots+\lambda_m\mathbf{a}_m$。<br>将$\lambda$写完整：$\lambda=[\lambda_1,\lambda_2,\ldots,\lambda_m,0,0,\ldots,-1,\ldots,0]^T$，<br>差值$\mathbf{c^Tx’-c^Tx=c^T(-\theta\lambda)=\theta(c_e-\sum_{a_i\in B}\lambda_ic_i)}​$，因此我们要选使得这个值的绝对值最大的$\mathbf{a}_e​$。那么什么时候表示找到的最优值了而应该停止了呢？和明显，就是对于所有$\mathbf{a}_e​$，这个差值都大于等于0，即目标函数不再减小。因此，每次迭代都要先计算差值，如果存在小于0的差值，就选一个使得差值绝对值最大的作为入基向量。</p>
+<p>假设$\mathbf{B}=\{\mathbf{a}_1, \mathbf{a}_2,\ldots, \mathbf{a}_m\}$，那么对于任何一个非基向量$\mathbf{a}_e$，<br>都有$\mathbf{a}_e=\lambda_1\mathbf{a}_1+\ldots+\lambda_m\mathbf{a}_m$。<br>将$\lambda$写完整：$\lambda=[\lambda_1,\lambda_2,\ldots,\lambda_m,0,0,\ldots,-1,\ldots,0]^T$，<br>差值$\mathbf{c^Tx’-c^Tx=c^T(-\theta\lambda)=\theta(c_e-\sum_{a_i\in B}\lambda_ic_i)}​$，因此我们要选使得这个值的绝对值最大的$\mathbf{a}_e​$。那么什么时候表示找到的最优值了而应该停止了呢？和明显，就是对于所有$\mathbf{a}_e​$，这个差值都大于等于0，即目标函数不再减小。因此，每次迭代都要先计算差值，如果存在小于0的差值，就选一个使得差值绝对值最大的作为入基向量。</p>
 <p>接下来要考虑向量化操作。首先我们看一下$\lambda$是否能向量化表示：由于$\mathbf{B}\lambda=\mathbf{a}_e$($\lambda$只取基系数部分)，因此$\lambda=\mathbf{B^{-1}}\mathbf{a}_e$，<strong>如果对整个矩阵$\mathbf{A}$左乘$\mathbf{B}^{-1}$，这就很有意思了，所有的非基列将变成该非基向量用基向量表示的系数，而左右的基列将变成$e_k$，即合起来成为一个单位阵的形式。</strong>只是很关键的一步，在单纯型算法实现中也涉及到。进一步，我们取$\mathbf{c}$的基部分$\mathbf{c}_B$，这样$\mathbf{c_B^TB^{-1}A}$就等于了上式中的$\sum_{\mathbf{a}_i\in \mathbf{B}}\lambda_i\mathbf{c}_i$的向量化形式（对所有的非基向量一同操作）。然后再加上一部分，变成$\mathbf{c^T-c_B^TB^{-1}A}$这就是最终的形式，称之为检验数$\bar{\mathbf{c}}$。很容易验证，基向量对应的检验数都是0，我们的目标就是通过迭代，使得$\bar{\mathbf{c}}\geq0$，这时对于任何一个可行解$\mathbf{Ay=b,y\geq0}$，都有$\mathbf{c^Ty}\geq\mathbf{c_B^TB^{-1}Ay=c_B^TB^{-1}b=c_B^Tx_B=c^Tx}$，即$\mathbf{x}$就是最优的。</p>
 <h2 id="单纯型算法的核心：单纯型表"><a href="#单纯型算法的核心：单纯型表" class="headerlink" title="单纯型算法的核心：单纯型表"></a>单纯型算法的核心：单纯型表</h2><p>单纯型算法呼之欲出。将上面的东西整理整一个简短的高效的可行算法并不简单。伪代码如下：</p>
 <p><img src="5.jpg" alt=""></p>

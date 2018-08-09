@@ -747,7 +747,7 @@
       
         
           <p>线性规划(Linear Programming, LP)中的一种常见的经典的算法之一，而单纯型算法就是非常常用的用来解决这个问题的方法之一。</p>
-<p>在中学的时候我们曾经简单的接触过线性规划，当时的做法基本上是在二维平面上做出图形，标出可行域，以固定斜率画直线簇。而往往最优解的地方是通过（凸）可行域的顶点。例如：<br>$$<br>\begin{equation}<br>\begin{split}<br>\max&amp; \quad x_3+x_4 \<br>s.t.&amp; \quad -x_3+2x_4\leq 2 \<br>&amp;\quad 3x_3-2x_4\leq 6 \<br>&amp;\quad x_3, x_4\geq 0<br>\end{split}<br>\end{equation}<br>$$<br>在二维平面上做可行域，在平面（4,3）点处可以取得目标函数最大值。</p>
+<p>在中学的时候我们曾经简单的接触过线性规划，当时的做法基本上是在二维平面上做出图形，标出可行域，以固定斜率画直线簇。而往往最优解的地方是通过（凸）可行域的顶点。例如：<br>$$<br>\begin{aligned}<br>\begin{split}<br>\max&amp; \quad x_3+x_4 \\<br>s.t.&amp; \quad -x_3+2x_4\leq 2 \\<br>&amp;\quad 3x_3-2x_4\leq 6 \\<br>&amp;\quad x_3, x_4\geq 0<br>\end{split}<br>\end{aligned}<br>$$<br>在二维平面上做可行域，在平面（4,3）点处可以取得目标函数最大值。</p>
 <p>之后我们将证明：最优解一定是可行域（凸超几何体）的顶点之一。先假设这个成立，我们使用“改进-停止”（improve-stopping）的方法，即给定一个可行域的顶点，求值，沿一条边到达下一个顶点，判断是否能够改善解，直到达到停止条件。</p>
 <p>那么</p>
 <ul>
