@@ -1,0 +1,1093 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans,en,ja,default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="xF6uYrMOkD_u5JmQ8R0Kd9-Rpim-QsToUIxGg6Jdlz0" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="线性规划," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="线性规划(Linear Programming, LP)中的一种常见的经典的算法之一，而单纯型算法就是非常常用的用来解决这个问题的方法之一。 在中学的时候我们曾经简单的接触过线性规划，当时的做法基本上是在二维平面上做出图形，标出可行域，以固定斜率画直线簇。而往往最优解的地方是通过（凸）可行域的顶点。例如：$$\begin{equation}\begin{split}\max&amp;amp; \quad">
+<meta name="keywords" content="线性规划">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单纯形算法">
+<meta property="og:url" content="http://yoursite.com/2018/03/26/单纯形算法/index.html">
+<meta property="og:site_name" content="Pjskd1&#39;s LOG">
+<meta property="og:description" content="线性规划(Linear Programming, LP)中的一种常见的经典的算法之一，而单纯型算法就是非常常用的用来解决这个问题的方法之一。 在中学的时候我们曾经简单的接触过线性规划，当时的做法基本上是在二维平面上做出图形，标出可行域，以固定斜率画直线簇。而往往最优解的地方是通过（凸）可行域的顶点。例如：$$\begin{equation}\begin{split}\max&amp;amp; \quad">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/03/26/单纯形算法/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/26/单纯形算法/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/26/单纯形算法/3.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/26/单纯形算法/4.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/26/单纯形算法/5.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/26/单纯形算法/6.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/26/单纯形算法/7.jpg">
+<meta property="og:updated_time" content="2018-03-27T13:04:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="单纯形算法">
+<meta name="twitter:description" content="线性规划(Linear Programming, LP)中的一种常见的经典的算法之一，而单纯型算法就是非常常用的用来解决这个问题的方法之一。 在中学的时候我们曾经简单的接触过线性规划，当时的做法基本上是在二维平面上做出图形，标出可行域，以固定斜率画直线簇。而往往最优解的地方是通过（凸）可行域的顶点。例如：$$\begin{equation}\begin{split}\max&amp;amp; \quad">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/26/单纯形算法/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/26/单纯形算法/"/>
+
+
+
+
+
+  <title> 单纯形算法 | Pjskd1's LOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-97728634-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Pjskd1's LOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录我的生活</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/26/单纯形算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Pjskd1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Pjskd1's LOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                单纯形算法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-26T23:37:45+09:00">
+                2018-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/03/26/单纯形算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/03/26/单纯形算法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>线性规划(Linear Programming, LP)中的一种常见的经典的算法之一，而单纯型算法就是非常常用的用来解决这个问题的方法之一。</p>
+<p>在中学的时候我们曾经简单的接触过线性规划，当时的做法基本上是在二维平面上做出图形，标出可行域，以固定斜率画直线簇。而往往最优解的地方是通过（凸）可行域的顶点。例如：<br>$$<br>\begin{equation}<br>\begin{split}<br>\max&amp; \quad x_3+x_4 \<br>s.t.&amp; \quad -x_3+2x_4\leq 2 \<br>&amp;\quad 3x_3-2x_4\leq 6 \<br>&amp;\quad x_3, x_4\geq 0<br>\end{split}<br>\end{equation}<br>$$<br>在二维平面上做可行域，在平面（4,3）点处可以取得目标函数最大值。</p>
+<p>之后我们将证明：最优解一定是可行域（凸超几何体）的顶点之一。先假设这个成立，我们使用“改进-停止”（improve-stopping）的方法，即给定一个可行域的顶点，求值，沿一条边到达下一个顶点，判断是否能够改善解，直到达到停止条件。</p>
+<p>那么</p>
+<ul>
+<li>为什么最优解一定在顶点？</li>
+<li>怎么得到顶点？</li>
+<li>怎么实现沿一条边到达下一个顶点？</li>
+<li>什么时候停止？</li>
+</ul>
+<p>当可以解答这些问题了之后，我们就可以大致了解单纯型算法的概要了。</p>
+<a id="more"></a>
+<h2 id="线性规划问题的形式"><a href="#线性规划问题的形式" class="headerlink" title="线性规划问题的形式"></a>线性规划问题的形式</h2><h3 id="一般形式"><a href="#一般形式" class="headerlink" title="一般形式"></a>一般形式</h3><p>$$<br>\begin{equation}<br>\max. \sum^n_{j=1}c_jx_j \<br> s.t.<br> \left{<br>     \begin{aligned}<br>     &amp;\sum^n_{t=1} a_{it}x_t \leq b_i \quad i=1,2,\cdots,m_1 \<br>     &amp;\sum^n_{t=1} a_{jt}x_t = b_j \quad j=m_1+1,\cdots,m_1+m_2 \<br>     &amp;\sum^n_{t=1} a_{kt}x_t \geq b_k \quad k=m_1+m_2+1, \cdots,  m_1+m_2+m_3 \<br>     &amp;x_t\geq 0 \quad t=1,2,\cdots, n<br>     \end{aligned}<br> \right.<br> \end{equation}<br>$$</p>
+<h3 id="标准形式"><a href="#标准形式" class="headerlink" title="标准形式"></a>标准形式</h3><p>线性规划问题的一般形式缺少不等式约束，而只有等式约束以及变量非负约束的时候称为线性规划问题的标准形式。然而在实际问题中几乎不存在这样完美的约束条件，所以我们在解决问题的时候要将一般形式转换为标准形式。<strong>任意一个线性规划问题可以转换为约束标准型线性规划问题。</strong></p>
+<p>一般线性规划化为标准型：</p>
+<ul>
+<li><p>若目标函数为求最小$\min$，可以通过取负，来求取最大值。</p>
+</li>
+<li><p>若约束不等式为小于等于不等式，可以在等式左端加入非负松弛变量，转变为等式。</p>
+<p>同理，若约束不等式为大于等于不等式，可以在等式左端减去一个非负松弛变量，变为等式。</p>
+</li>
+<li><p>若存在取值无约束的变量，可以转变为两个非负变量的差值，例如：<br>$$<br>\begin{equation}<br>-\infty \leq x_k \leq +\infty \Rightarrow<br>\left{<br>\begin{aligned}<br>x_k = x_m-x_n \<br>x_m,x_n \geq 0 \<br>\end{aligned}<br>\right.<br>\end{equation}<br>$$</p>
+</li>
+</ul>
+<h3 id="规范形式"><a href="#规范形式" class="headerlink" title="规范形式"></a>规范形式</h3><p>规范形式就是在标准形式的基础上添加人工变量，以便于在不容易的到初始基可行解的时候获取第一个初始可行解。详情见两阶段单纯型算法（两阶段单纯型算法（Two-Phase Simplex Method）。</p>
+<h2 id="凸多边形的最优解在顶点取得"><a href="#凸多边形的最优解在顶点取得" class="headerlink" title="凸多边形的最优解在顶点取得"></a>凸多边形的最优解在顶点取得</h2><p>下面我们来证明为什么最优解一定在顶点。</p>
+<p>考虑最小化问题，目标函数$\mathbf{c}^T \mathbf{x}$，有一个在可行域内部的最优解$\mathbf{x}^{(0)}$，因为凸多边形内幕任一点都可以表示成顶点的线性组合，即对于顶点$\mathbf{x}^{(k)}, k=1,2,\cdots,n$，有<br>$$<br>\mathbf{x}^{(0)}=\sum_{k=1}^{n}\lambda_k\mathbf{x}^{(k)}, \<br>\sum_{k=1}^n \lambda_k=1<br>$$<br>假设$\mathbf{x}^{(i)}$是所有顶点中使得目标函数$\mathbf{c}^T \mathbf{x}$最小的顶点，那么<br>$$<br>\begin{equation}<br>\begin{split}<br>\mathbf{c}^T\mathbf{x}^{(0)} &amp;= \sum_{k=1}^{n}\lambda_k\mathbf{c}^T\mathbf{x}^{(k)} \<br>&amp;\geq \sum_{k=1}^{n}\lambda_k\mathbf{c}^T\mathbf{x}^{(i)} \<br>&amp;= \mathbf{c}^T\mathbf{x}^{(i)}<br>\end{split}<br>\end{equation}<br>$$<br>因此，总有一个顶点，它的目标函数值不比内部的点差。</p>
+<h2 id="如何得到凸多边形顶点"><a href="#如何得到凸多边形顶点" class="headerlink" title="如何得到凸多边形顶点"></a>如何得到凸多边形顶点</h2><p>下面要说明的定理是：对于可行域方程组$\mathbf{Ax=b}$，该方程确定的凸多边形的任意一个顶点对应$\mathbf{A}$的一组基底。</p>
+<h3 id="顶点对应一组基底"><a href="#顶点对应一组基底" class="headerlink" title="顶点对应一组基底"></a>顶点对应一组基底</h3><p><img src="1.jpg" alt=""></p>
+<p>这个例子是松弛型约束的线性规划，原来的变量有三个分别是x123，加上后面四个变成标准型等式，形成的可行域如上图所示。现在取顶点$(0,2,0)$分析。（在实际问题中，也许没有办法获得起始顶点，这时候要采用大M算法或者两阶段单纯型算法，目前在计算机计算的大规模线性规划问题中，一般使用两阶段单纯型算法）将顶点带入约束中，可以计算得到一个完整解$x=(0，2，0，2，2，3，0)$。取出矩阵A中对应的x不为0的列，即下图中表蓝的几列（用$\mathbf{a}_2, \mathbf{a}_4, \mathbf{a}_5, \mathbf{a}_6$表示），那么这几列就是线性无关的，考虑$m&lt;n$（约束的条件数小于松弛后的变量个数），那么自由解有$n-m$维，因此挑出来的列必有$m$个，构成一组基底。</p>
+<p><strong>下面来证明为什么他们线性无关。</strong>假设它们线性相关，即存在一组$\lambda\neq\mathbf{0}$使得$\lambda_2\mathbf{a}_2+\lambda_4\mathbf{a}_4+\lambda_5\mathbf{a}_5+\lambda_6\mathbf{a}_6=0$，也就是说，可以构造一组$\lambda=[0, \lambda_2, 0, \lambda_4, \lambda_5, \lambda_6, 0]$，使得$\mathbf{A}\lambda=0$。那么还可以再构造两个异于$x$的解：$x’=x+\theta\lambda$和$x’’=x-\theta\lambda$。它们都满足$\mathbf{Ax=b}$。并且可以通过控制$\theta$取得很小的正值，使得这两个解都满足大于0的约束。由此，这两个解都在凸多面体内，并且有$x=\frac{1}{2}(x’+x’’)$，但是这是不完美的，因为一个凸多面体的顶点是不能被内部的点线性表示的，因此这几列是构成一组基底的。</p>
+<p><img src="2.jpg" alt=""></p>
+<p>在这里，我们还可以对每一组解，都将$\mathbf{A}$的列重新排列一下，将解向量也排列一下，写成分块矩阵的形式，因为重新排列之后形成的$\mathbf{x}<em>N = 0$,那么就会有$\mathbf{x}</em>{\mathbf{B}}=\mathbf{B}^{-1}\mathbf{b}$，并且目标函数转化为$\mathbf{c^Tx=c_B^TB^{-1}b}$。这是两个很有用的公式，在后面的单纯型算法的理解上很有帮助。</p>
+<p><img src="3.jpg" alt=""></p>
+<h3 id="一组基底对应一个基可行解（顶点）"><a href="#一组基底对应一个基可行解（顶点）" class="headerlink" title="一组基底对应一个基可行解（顶点）"></a>一组基底对应一个基可行解（顶点）</h3><p>有了上面的知识，给定一组基底$\mathbf{B}$，我们直接构造$\mathbf{x}=[\mathbf{B^{-1}b}, \mathbf{0}]^T$，只要说明他不能被两个异于它的内部点线性表示即可。假设有两个内部点$\mathbf{x}_1, \mathbf{x}_2$，满足$\mathbf{x}=\lambda_1\mathbf{x}_1+\lambda_2\mathbf{x}_2$，由于$\mathbf{x}_N=0$，并且这些解的元素都大于等于0，因此$\mathbf{x_1}_{\mathbf{N}}=\mathbf{x_2}_{\mathbf{N}}=0$。而又因为$\mathbf{Ax_1=Ax_2=b}$，因此$\mathbf{x_1}_{\mathbf{B}}=\mathbf{x_2}_{\mathbf{B}}=\mathbf{B^{-1}b}$。即这两个解和x相同，因此x是顶点。</p>
+<h2 id="如何从一个顶点沿边到达另一个顶点"><a href="#如何从一个顶点沿边到达另一个顶点" class="headerlink" title="如何从一个顶点沿边到达另一个顶点"></a>如何从一个顶点沿边到达另一个顶点</h2><p>这里要研究怎么改善一个解，在图形上讲就是如何从一个顶点出发沿着边找到另一个顶点。上一节我们知道了一个顶点对应一组基底，而且一个矩阵的基底有多个，那么是否可以通过基底的变换来使得顶点变换呢。举个例子：</p>
+<p><img src="4.jpg" alt=""></p>
+<p>图中红色点对应的是之前我们拿来举例子的完全解$\mathbf{x}=[2,0,0,2,0,3,6]$，对应的基底是$\mathbf{B}={\mathbf{a}_1，\mathbf{a}_4，\mathbf{a}_6，\mathbf{a}_7}$，考虑向量$\mathbf{a}_3$，即绿色的列，可以表示成：<br>$$<br>\mathbf{a}_3=0\mathbf{a}_1+1\mathbf{a}_4+1\mathbf{a}_6+1\mathbf{a}_7<br>$$<br>补全式子，有<br>$$<br>0\mathbf{a}_1+0\mathbf{a}_2-1\mathbf{a}_3+1\mathbf{a}_4++0\mathbf{a}_5+1\mathbf{a}_6+1\mathbf{a}_7=0<br>$$<br>写出系数：$\lambda=[0,0,-1,1,0,1,1]$，它就是对应上图中的绿色向量（相反方向）。因此只有沿着这个方向走适合的步长$\theta$，就能到达下一个顶点。即新旧顶点的关系为：<br>$$<br>\mathbf{x’}=\mathbf{x}-\theta\mathbf{\lambda}\quad(\theta&gt;0)<br>$$<br>那么多大的$\theta$合适呢？我们很容易知道$\mathbf{x}’$能够满足$\mathbf{Ax=b}$，因为$\mathbf{A\lambda=0}$，现在要保证的就是$\mathbf{x}’$的各个分量大于等于0。<br>$$<br>\because \mathbf{A\lambda=0} \  \&amp; \ \mathbf{x}-\mathbf{x’}=\theta\mathbf{\lambda} \<br>\therefore \lambda = \frac{\mathbf{x}-\mathbf{x’}}{\theta} \ \&amp; \ \mathbf{A} \frac{\mathbf{x}-\mathbf{x’}}{\theta}=0 \<br>\therefore \mathbf{x} = \mathbf{x}’ \ \&amp; \ \mathbf{Ax} = \mathbf{Ax’} = \mathbf{b}<br>$$<br>对于$\lambda_i\leq0$的项，相减之后大于0，满足要求。但是对于$\lambda_i&gt;0$的项，需要小心，因为要保证相减之后仍然大于等于0，我们设：<br>$$<br>\theta=\min\limits_{\mathbf{a}_i\in \mathbf{B},\lambda_i&gt;0}\frac{x_i}{\lambda_i}<br>$$<br>就能保证。在上面的例子中，，所以新的解是$\mathbf{x’}=[2,0,2,0,0,1,4]$，对应的基底是$\mathbf{B’}={\mathbf{a}_1，\mathbf{a}_3，\mathbf{a}_6，\mathbf{a}_7}$，到这里，看似我们找到了运动到下一个顶点的方法，也就是先找一个非基向量，将它写成用基向量表示的形式，提出系数，确定步长，得到新的解。但是还有一个小问题，我们看到实际上$\mathbf{B}’$和$\mathbf{B}$差了一个向量，相当于把$\mathbf{a}_4$换出去，把$\mathbf{a}_3$换进来。我们成这个过程为换基，后面算法实现部分叫pivot。那么怎么保证换完这个向量之后，仍然是基呢？</p>
+<p>证明：$\mathbf{B’}=\mathbf{B}-\mathbf{a}_l+\mathbf{a}_e$仍然是基。（l for leave, e for enter）</p>
+<p>假设$\mathbf{B}’$线性相关，<br>那么存在$&lt; d_1,d_2,\cdots,d_{l-1},d_{l+1},\cdots,d_m, d_e &gt; \neq 0$，<br>使得$\sum_{k}  d_k \mathbf{a}_k =0$而$\mathbf{a}<em>e = \sum</em>{i=1}^m \lambda_i \mathbf{a_i}$，带入得到：<br>$$<br>(d_1+d_e\lambda_1)\mathbf{a_1}+\ldots+(d_e\lambda_l)\mathbf{a}_l+\ldots+(d_m+d_e\lambda_m)\mathbf{a}_m=0<br>$$</p>
+<p>这里是证明的关键之处：我们在设置$\theta​$的时候的做法，加入最终选出来的使得$\frac{x_i}{\lambda_i}​$最小的那一项下标为p，那么得到的新的解的第p项必然为0，相当于把$\mathbf{a}_p​$换了出去。在上面这个例子中$p=4​$。而因为我们只考虑$\lambda_i&gt;0​$的基向量，因此被换出去的基$\mathbf{a}_l​$对应的$\lambda_l&gt;0​$，因此上式中有$d_1=d_2=\ldots=d_m=d_e=0​$，与原假设矛盾，因此$\mathbf{B’}​$也是线性无关的。</p>
+<p>到这里，我们了解了单纯型算法就是通过反复的及变化呢（通过响亮的进出）来找顶点，从而找到达到最优值的顶点。但是还是有些细节需要考虑，比如，怎么选入基向量？改善（improve）的过程什么时候停止？</p>
+<h2 id="入基向量的选择以及停止准则"><a href="#入基向量的选择以及停止准则" class="headerlink" title="入基向量的选择以及停止准则"></a>入基向量的选择以及停止准则</h2><p>以最小化问题为标准，我们的最终目标是最小化$\mathbf{c^Tx}$，因此一个很自然的贪心想法是每步的改善都尽可能地大，因此可以计算一下更新的目标函数值和原来的差值，取使得变化大的顶点继续下一步迭代。那么这个差值怎么能够向量化地计算呢？只有向量化地计算，才能避免一个一个地计算比较，提高效率。</p>
+<p>假设$\mathbf{B}={\mathbf{a}_1, \mathbf{a}_2,\ldots, \mathbf{a}_m}$，那么对于任何一个非基向量$\mathbf{a}_e$，<br>都有$\mathbf{a}_e=\lambda_1\mathbf{a}_1+\ldots+\lambda_m\mathbf{a}_m$。<br>将$\lambda$写完整：$\lambda=[\lambda_1,\lambda_2,\ldots,\lambda_m,0,0,\ldots,-1,\ldots,0]^T$，<br>差值$\mathbf{c^Tx’-c^Tx=c^T(-\theta\lambda)=\theta(c_e-\sum_{a_i\in B}\lambda_ic_i)}​$，因此我们要选使得这个值的绝对值最大的$\mathbf{a}_e​$。那么什么时候表示找到的最优值了而应该停止了呢？和明显，就是对于所有$\mathbf{a}_e​$，这个差值都大于等于0，即目标函数不再减小。因此，每次迭代都要先计算差值，如果存在小于0的差值，就选一个使得差值绝对值最大的作为入基向量。</p>
+<p>接下来要考虑向量化操作。首先我们看一下$\lambda$是否能向量化表示：由于$\mathbf{B}\lambda=\mathbf{a}_e$($\lambda$只取基系数部分)，因此$\lambda=\mathbf{B^{-1}}\mathbf{a}_e$，<strong>如果对整个矩阵$\mathbf{A}$左乘$\mathbf{B}^{-1}$，这就很有意思了，所有的非基列将变成该非基向量用基向量表示的系数，而左右的基列将变成$e_k$，即合起来成为一个单位阵的形式。</strong>只是很关键的一步，在单纯型算法实现中也涉及到。进一步，我们取$\mathbf{c}$的基部分$\mathbf{c}_B$，这样$\mathbf{c_B^TB^{-1}A}$就等于了上式中的$\sum_{\mathbf{a}_i\in \mathbf{B}}\lambda_i\mathbf{c}_i$的向量化形式（对所有的非基向量一同操作）。然后再加上一部分，变成$\mathbf{c^T-c_B^TB^{-1}A}$这就是最终的形式，称之为检验数$\bar{\mathbf{c}}$。很容易验证，基向量对应的检验数都是0，我们的目标就是通过迭代，使得$\bar{\mathbf{c}}\geq0$，这时对于任何一个可行解$\mathbf{Ay=b,y\geq0}$，都有$\mathbf{c^Ty}\geq\mathbf{c_B^TB^{-1}Ay=c_B^TB^{-1}b=c_B^Tx_B=c^Tx}$，即$\mathbf{x}$就是最优的。</p>
+<h2 id="单纯型算法的核心：单纯型表"><a href="#单纯型算法的核心：单纯型表" class="headerlink" title="单纯型算法的核心：单纯型表"></a>单纯型算法的核心：单纯型表</h2><p>单纯型算法呼之欲出。将上面的东西整理整一个简短的高效的可行算法并不简单。伪代码如下：</p>
+<p><img src="5.jpg" alt=""></p>
+<p><img src="6.jpg" alt=""></p>
+<p>另外一个单纯型表：</p>
+<p><img src="7.jpg" alt=""></p>
+<p>现在我们来对算法进行分析，将算法的每一个步骤和我们上面的介绍对应起来。</p>
+<ul>
+<li>SIMPLEX算法一开始调用INITIALIZESIMPLEX找到一个初始基可行解，这在某些情况下很简单，当$\mathbf{b}\geq0$时，他就是一个初始基可行解，否则，可能要用到两阶段法、大M法等求，这不是重点。</li>
+<li>WHILE循环内，只要找到一个$c_e&lt;0$，就继续迭代。第10到16行就是通过设定$\theta$找到出基向量。</li>
+<li>最关键最有意思的就是PIVOT算法，他巧妙地将我们介绍的繁杂操作使用一个简单的高斯行变换就实现了。而这个算法的载体就是单纯形表，如上图，左上角是目标函数值相反数$-z$，第一行是检验数$\bar{\mathbf{c}}$，左下角是基对应的部分解（其他部分是0，不用写出），右下角是矩阵$\mathbf{A}$。他始终被分块成两部分，基向量部分始终以单位阵的形式存在。注意左边的部分解每个分量都是严格对应着一个基向量，即他们是有顺序的。</li>
+<li>一行一行地看PIVOT算法。输入参数告诉我们下标为$l$的向量被换出，因此找到他对应的那行，暂称为第$l$行，这一行对应的基的下标要被换成$e$，那么为什么更新后对应的解是$\frac{b_l}{a_{le}}$呢，要注意，其实这个值就是$\theta$，$b_l$就是旧的$x_i$，$a_{le}$就是$\lambda_i$（上面已经解释了乘上$\mathbf{B}^{-1}$后每一列都是系数）。那么为什么更新后是$\theta$呢？我们回到式子$\mathbf{x’=x-\theta\lambda}$，由于$b_l$现在对应的新向量不是$\mathbf{x}$对应的基向量，因此$\mathbf{x}$在该位置的值是0，而我们知道$\lambda$在入基向量对应的位置的值是-1，因此$0-(-1)\theta=\theta$。</li>
+<li>第3到4行，将第$l$行除以$a_{le}$，目的就是将$a_{le}$变成1，因为要始终保持基是以单位阵的形式存在。</li>
+<li>第8行，就是在执行$\mathbf{x’=x-\theta\lambda}$的操作，得到新解。</li>
+<li>第10行，高斯行变换，你会发现这样操作完后，入基列就变成和刚才出基列一样，高斯行变换保证了矩阵的性质。</li>
+<li>第14行，我们知道$-z=0-\mathbf{c_B^TB^{-1}b}$，由于旧有的基对应的$c$都是0，而只有新换入的向量对应的$c_e$不为0，具体写一下，减掉的那部分就只有$c_e$和他对应的解$b_l$的乘积了。同理，第16行，$\mathbf{c^T-c_B^TB^{-1}A}$，由于也是只有$c_e$不为0，因此就和他对应的$\mathbf{A}$的第$l$行相乘了。</li>
+</ul>
+<p>到此，终于介绍完了单纯形算法。其他还有一些要注意的地方，比如一定要注意检验数和原目标函数的$\mathbf{c}$是完全不一样的概念，在原约束为不等式，需要加松弛变量的情况下，他们可能相等，但心里一定要区分它们，同时，这种情况下，基很容易找，就是松弛变量的那几列构成的单位阵。但是如果原约束是等式，就需要自己找基，并且这时检验数往往就和目标函数参数不同了。</p>
+<p><em>声明：以上所用的截图均来自中科院计算所B老师的课程PPT</em></p>
+<h2 id="两阶段单纯型算法（Two-Phase-Simplex-Method）"><a href="#两阶段单纯型算法（Two-Phase-Simplex-Method）" class="headerlink" title="两阶段单纯型算法（Two-Phase Simplex Method）"></a>两阶段单纯型算法（Two-Phase Simplex Method）</h2><p>单纯型法简单来说可以归纳为三个步骤，即</p>
+<ul>
+<li>初始基可行解</li>
+<li>解的迭代（优化，improve）</li>
+<li>最优性检验</li>
+</ul>
+<p>但是并不是所有的线性规划最优化问题都能够很简单的找到初始的基可行解，那么就需要考虑如何获取第一个初始可行解。</p>
+<p>对于不是规范型的标准型，用单纯型法求解的办法就是添加人工变量（Artificial Variables），使标准型认为的变为规范型。</p>
+<ol>
+<li><p>第一阶段：不考虑原问题是否存在基可行解，给原线性规划模型加入人工变量，并构造仅含有人工变量的目标函数，实现极小化。假设$x_{n+1},x_{n+2},\cdots,x_{n+m}$为加入的人工变量，则新的目标函数为人工变量的累加和，并求极小化：<br>$$<br>\min. w=\sum^m_{j=1}x_{n+j}<br>$$<br>约束方程通过添加人工变量变成了规范型。然后用单纯型法求解上述模型，若人工变量能够全部出基，即取值为0，$w=0$，这说明原问题存在基可行解，可以进入第二阶段计算。否则，原问题无可行解，应停止计算。</p>
+</li>
+<li><p>第二阶段：对原目标函数求最优解。</p>
+<p>第一阶段迭代的目标是使人工变量出基，得到满足原约束方程组的一个基可行解，而第二阶段是要得到一个使原目标最优的基可行解。故目标函数应换回来，同时去掉人工变量，继续用单纯形法寻求最优解。<strong>要注意人工变量不同于松弛变量，松弛变量是为了要让非标准型变为标准型，而人工变量是为了让标准型变为规范型。</strong></p>
+</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://www.cnblogs.com/Kenneth-Wong/p/8451343.html" target="_blank" rel="noopener">单纯型算法详细解析-Kenneth-Wong‘s blog-cnblogs</a></li>
+<li><a href="http://58.20.53.45/files/files_upload/content/material_148/content/001007/" target="_blank" rel="noopener">二阶段单纯型法</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/线性规划/" rel="tag"># 线性规划</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/01/这几个月/" rel="next" title="这几个月">
+                <i class="fa fa-chevron-left"></i> 这几个月
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/09/Deep-Learning-学习笔记1/" rel="prev" title="Deep-Learning-学习笔记1">
+                Deep-Learning-学习笔记1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Pjskd1" />
+          <p class="site-author-name" itemprop="name">Pjskd1</p>
+           
+              <p class="site-description motion-element" itemprop="description">瞎写</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Pjskd1" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100015773921039" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.weibo.com/u/2743249160?is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线性规划问题的形式"><span class="nav-number">1.</span> <span class="nav-text">线性规划问题的形式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一般形式"><span class="nav-number">1.1.</span> <span class="nav-text">一般形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准形式"><span class="nav-number">1.2.</span> <span class="nav-text">标准形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#规范形式"><span class="nav-number">1.3.</span> <span class="nav-text">规范形式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#凸多边形的最优解在顶点取得"><span class="nav-number">2.</span> <span class="nav-text">凸多边形的最优解在顶点取得</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何得到凸多边形顶点"><span class="nav-number">3.</span> <span class="nav-text">如何得到凸多边形顶点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#顶点对应一组基底"><span class="nav-number">3.1.</span> <span class="nav-text">顶点对应一组基底</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一组基底对应一个基可行解（顶点）"><span class="nav-number">3.2.</span> <span class="nav-text">一组基底对应一个基可行解（顶点）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何从一个顶点沿边到达另一个顶点"><span class="nav-number">4.</span> <span class="nav-text">如何从一个顶点沿边到达另一个顶点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#入基向量的选择以及停止准则"><span class="nav-number">5.</span> <span class="nav-text">入基向量的选择以及停止准则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单纯型算法的核心：单纯型表"><span class="nav-number">6.</span> <span class="nav-text">单纯型算法的核心：单纯型表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#两阶段单纯型算法（Two-Phase-Simplex-Method）"><span class="nav-number">7.</span> <span class="nav-text">两阶段单纯型算法（Two-Phase Simplex Method）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">8.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Pjskd1</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://https-pjskd1-github-io.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/03/26/单纯形算法/';
+          this.page.identifier = '2018/03/26/单纯形算法/';
+          this.page.title = '单纯形算法';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-pjskd1-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
