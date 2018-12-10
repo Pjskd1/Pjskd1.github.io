@@ -105,7 +105,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/03/26/单纯形算法/5.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/03/26/单纯形算法/6.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/03/26/单纯形算法/7.jpg">
-<meta property="og:updated_time" content="2018-08-09T16:59:14.310Z">
+<meta property="og:updated_time" content="2018-12-10T08:45:58.964Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单纯形算法">
 <meta name="twitter:description" content="线性规划(Linear Programming, LP)中的一种常见的经典的算法之一，而单纯型算法就是非常常用的用来解决这个问题的方法之一。 在中学的时候我们曾经简单的接触过线性规划，当时的做法基本上是在二维平面上做出图形，标出可行域，以固定斜率画直线簇。而往往最优解的地方是通过（凸）可行域的顶点。例如：$$\begin{aligned}\begin{split}\max&amp;amp; \quad x">
@@ -460,7 +460,7 @@
 <h2 id="如何得到凸多边形顶点"><a href="#如何得到凸多边形顶点" class="headerlink" title="如何得到凸多边形顶点"></a>如何得到凸多边形顶点</h2><p>下面要说明的定理是：对于可行域方程组$\mathbf{Ax=b}$，该方程确定的凸多边形的任意一个顶点对应$\mathbf{A}$的一组基底。</p>
 <h3 id="顶点对应一组基底"><a href="#顶点对应一组基底" class="headerlink" title="顶点对应一组基底"></a>顶点对应一组基底</h3><p><img src="1.jpg" alt=""></p>
 <p>这个例子是松弛型约束的线性规划，原来的变量有三个分别是x123，加上后面四个变成标准型等式，形成的可行域如上图所示。现在取顶点$(0,2,0)$分析。（在实际问题中，也许没有办法获得起始顶点，这时候要采用大M算法或者两阶段单纯型算法，目前在计算机计算的大规模线性规划问题中，一般使用两阶段单纯型算法）将顶点带入约束中，可以计算得到一个完整解$x=(0，2，0，2，2，3，0)$。取出矩阵A中对应的x不为0的列，即下图中表蓝的几列（用$\mathbf{a}_2, \mathbf{a}_4, \mathbf{a}_5, \mathbf{a}_6$表示），那么这几列就是线性无关的，考虑$m&lt;n$（约束的条件数小于松弛后的变量个数），那么自由解有$n-m$维，因此挑出来的列必有$m$个，构成一组基底。</p>
-<p><strong>下面来证明为什么他们线性无关。</strong>假设它们线性相关，即存在一组$\lambda\neq\mathbf{0}$使得$\lambda_2\mathbf{a}_2+\lambda_4\mathbf{a}_4+\lambda_5\mathbf{a}_5+\lambda_6\mathbf{a}_6=0$，也就是说，可以构造一组$\lambda=[0, \lambda_2, 0, \lambda_4, \lambda_5, \lambda_6, 0]$，使得$\mathbf{A}\lambda=0$。那么还可以再构造两个异于$x$的解：$x’=x+\theta\lambda$和$x’’=x-\theta\lambda$。它们都满足$\mathbf{Ax=b}$。并且可以通过控制$\theta$取得很小的正值，使得这两个解都满足大于0的约束。由此，这两个解都在凸多面体内，并且有$x=\frac{1}{2}(x’+x’’)$，但是这是不完美的，因为一个凸多面体的顶点是不能被内部的点线性表示的，因此这几列是构成一组基底的。</p>
+<p><strong>下面来证明为什么他们线性无关。</strong>假设它们线性相关，即存在一组\lambda\neq\mathbf{0}使得$\lambda_2\mathbf{a}_2+\lambda_4\mathbf{a}_4+\lambda_5\mathbf{a}_5+\lambda_6\mathbf{a}_6=0，也就是说，可以构造一组，也就是说，可以构造一组\lambda=[0, \lambda_2, 0, \lambda_4, \lambda_5, \lambda_6, 0]，使得，使得\mathbf{A}\lambda=0。那么还可以再构造两个异于。那么还可以再构造两个异于x的解：的解：x’=x+\theta\lambda和和x’’=x-\theta\lambda。它们都满足。它们都满足\mathbf{Ax=b}。并且可以通过控制。并且可以通过控制\theta取得很小的正值，使得这两个解都满足大于的约束。由此，这两个解都在凸多面体内，并且有取得很小的正值，使得这两个解都满足大于0的约束。由此，这两个解都在凸多面体内，并且有x=\frac{1}{2}(x’+x’’)$，但是这是不完美的，因为一个凸多面体的顶点是不能被内部的点线性表示的，因此这几列是构成一组基底的。</p>
 <p><img src="2.jpg" alt=""></p>
 <p>在这里，我们还可以对每一组解，都将$\mathbf{A}$的列重新排列一下，将解向量也排列一下，写成分块矩阵的形式，因为重新排列之后形成的$\mathbf{x}_N = 0$ ,那么就会有$\mathbf{x}_{\mathbf{B}}=\mathbf{B}^{-1}\mathbf{b}$，并且目标函数转化为$\mathbf{c^Tx=c_B^TB^{-1}b}$。这是两个很有用的公式，在后面的单纯型算法的理解上很有帮助。</p>
 <p><img src="3.jpg" alt=""></p>
@@ -645,7 +645,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -656,7 +656,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -667,7 +667,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
