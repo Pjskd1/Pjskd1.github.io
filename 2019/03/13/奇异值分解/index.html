@@ -90,21 +90,21 @@
 
 
 
-<meta name="description" content="奇异值分解简介$$A=U \Sigma V^{T}$$ 此处，$U=\left(u_{i j}\right)_{m \times m}, \Sigma=\left(\sigma_{i j}\right)_{m \times n}, V^{T}=\left(v_{i j}\right)_{n \times n}$，其中方阵U和V都是实正交矩阵（orthogonal matrix），也就是说，$U^T">
+<meta name="description" content="奇异值分解简介$$A=U \Sigma V^{T}$$ 此处，$U=\left(u_{i j}\right)_{m \times m}, \Sigma=\left(\sigma_{i j}\right)_{m \times n}, V^{T}=\left(v_{i j}\right)_{n \times n}​$，其中方阵U和V都是实正交矩阵（orthogonal matrix），也就是说，$U^">
 <meta name="keywords" content="Machine Learning,线性代数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="奇异值分解">
 <meta property="og:url" content="http://yoursite.com/2019/03/13/奇异值分解/index.html">
 <meta property="og:site_name" content="Pjskd1&#39;s LOG">
-<meta property="og:description" content="奇异值分解简介$$A=U \Sigma V^{T}$$ 此处，$U=\left(u_{i j}\right)_{m \times m}, \Sigma=\left(\sigma_{i j}\right)_{m \times n}, V^{T}=\left(v_{i j}\right)_{n \times n}$，其中方阵U和V都是实正交矩阵（orthogonal matrix），也就是说，$U^T">
+<meta property="og:description" content="奇异值分解简介$$A=U \Sigma V^{T}$$ 此处，$U=\left(u_{i j}\right)_{m \times m}, \Sigma=\left(\sigma_{i j}\right)_{m \times n}, V^{T}=\left(v_{i j}\right)_{n \times n}​$，其中方阵U和V都是实正交矩阵（orthogonal matrix），也就是说，$U^">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/03/13/奇异值分解/svd1.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/03/13/奇异值分解/svd2.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/03/13/奇异值分解/svd32.jpg">
-<meta property="og:updated_time" content="2019-03-13T06:04:58.443Z">
+<meta property="og:updated_time" content="2019-03-13T06:59:09.740Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="奇异值分解">
-<meta name="twitter:description" content="奇异值分解简介$$A=U \Sigma V^{T}$$ 此处，$U=\left(u_{i j}\right)_{m \times m}, \Sigma=\left(\sigma_{i j}\right)_{m \times n}, V^{T}=\left(v_{i j}\right)_{n \times n}$，其中方阵U和V都是实正交矩阵（orthogonal matrix），也就是说，$U^T">
+<meta name="twitter:description" content="奇异值分解简介$$A=U \Sigma V^{T}$$ 此处，$U=\left(u_{i j}\right)_{m \times m}, \Sigma=\left(\sigma_{i j}\right)_{m \times n}, V^{T}=\left(v_{i j}\right)_{n \times n}​$，其中方阵U和V都是实正交矩阵（orthogonal matrix），也就是说，$U^">
 <meta name="twitter:image" content="http://yoursite.com/2019/03/13/奇异值分解/svd1.jpg">
 
 
@@ -427,7 +427,8 @@
 
       
         <h2 id="奇异值分解简介"><a href="#奇异值分解简介" class="headerlink" title="奇异值分解简介"></a>奇异值分解简介</h2><p>$$<br>A=U \Sigma V^{T}<br>$$</p>
-<p>此处，$U=\left(u_{i j}\right)_{m \times m}, \Sigma=\left(\sigma_{i j}\right)_{m \times n}, V^{T}=\left(v_{i j}\right)_{n \times n}$，其中方阵U和V都是实正交矩阵（orthogonal matrix），也就是说，$U^T = U^{-1}, V^T=V^{-1}$， $\Sigma$是类对角矩阵，如下<br>$$<br>\begin{align}<br>\Sigma=<br>\begin{bmatrix}<br>{\sigma_{1}} &amp; {0} &amp; {0} &amp; {0} &amp; {\cdots} &amp; {0}\\<br>{0} &amp; {\ddots} &amp; {0} &amp; {\vdots} &amp; {\cdots} &amp; {0}\\<br>{0} &amp; {0} &amp; {\sigma_{r}} &amp; {0} &amp; {\cdots} &amp; {0}\\<br>{0} &amp; {\cdots} &amp; {0} &amp; {0} &amp; {\cdots} &amp; {0}\\<br>{\vdots} &amp; {\ddots} &amp; {\vdots} &amp; {\vdots} &amp; {\ddots} &amp; {\vdots}\\<br>{0} &amp; {\cdots} &amp; {0} &amp; {0} &amp; {\cdots} &amp; {0}<br>\end{bmatrix}<br>\end{align}<br>$$<br>主对角元$\sigma_{i}&gt;0, \quad i=1,2, \ldots, r​$，且$\sigma_{r+1}=\cdots \sigma_{p}=0, \quad p=\min \{m, n\}​$，称为奇异值（singular values）。注意，SVD的分解不具有唯一性。为了便于应用，我们习惯将奇异值由大到小排列：$\sigma_{1} \geq \sigma_{2} \geq \cdots \geq \sigma_{r}&gt;0​$。</p>
+<p>此处，$U=\left(u_{i j}\right)_{m \times m}, \Sigma=\left(\sigma_{i j}\right)_{m \times n}, V^{T}=\left(v_{i j}\right)_{n \times n}​$，其中方阵U和V都是实正交矩阵（orthogonal matrix），也就是说，$U^T = U^{-1}, V^T=V^{-1}​$， $\Sigma​$是类对角矩阵，如下<br>$$<br>\begin{align}<br>\Sigma=<br>\begin{bmatrix}<br>{\sigma_{1}} &amp; {0} &amp; {0} &amp; {0} &amp; {\cdots} &amp; {0}\\<br>{0} &amp; {\ddots} &amp; {0} &amp; {\vdots} &amp; {\cdots} &amp; {0}\\<br>{0} &amp; {0} &amp; {\sigma_{r}} &amp; {0} &amp; {\cdots} &amp; {0}\\<br>{0} &amp; {\cdots} &amp; {0} &amp; {0} &amp; {\cdots} &amp; {0}\\<br>{\vdots} &amp; {\ddots} &amp; {\vdots} &amp; {\vdots} &amp; {\ddots} &amp; {\vdots}\\<br>{0} &amp; {\cdots} &amp; {0} &amp; {0} &amp; {\cdots} &amp; {0}<br>\end{bmatrix}<br>\end{align}<br>$$<br>主对角元$\sigma_{i}&gt;0, \quad i=1,2, \ldots, r$，且$\sigma_{r+1}=\cdots \sigma_{p}=0, \quad p=\min \{m, n\}$，称为奇异值（singular values）。注意，SVD的分解不具有唯一性。为了便于应用，我们习惯将奇异值由大到小排列：$\sigma_{1} \geq \sigma_{2} \geq \cdots \geq \sigma_{r}&gt;0$。</p>
+<a id="more"></a>
 <p><img src="svd1.jpg" alt="奇异值分解结构"></p>
 <p>令矩阵U的行向量分别为$\mathbf{u}_i, i = 1, \dots, m$，矩阵V的行向量分别为$\mathbf{v}_{j}, j=1, \dots, n$， 则$A=U \Sigma V^{T}$可以表示为r个秩-1（rank-one）矩阵之和：<br>$$<br>\begin{align}<br>\begin{split}<br>A &amp;=<br>\begin{bmatrix}<br>\mathbf{u}_{1}&amp;\mathbf{u}_{2}&amp;\cdots &amp;\mathbf{u}_{m}<br>\end{bmatrix}<br>\begin{bmatrix}<br>\sigma_1&amp;&amp;&amp;&amp;\\<br>&amp;\sigma_2&amp;&amp;&amp;\\<br>&amp;&amp;\ddots&amp;&amp;\\<br>&amp;&amp;&amp;\sigma_r &amp;\\<br>&amp;&amp;&amp;&amp;\ddots<br>\end{bmatrix}<br>\begin{bmatrix}<br>\mathbf{v_1^\mathrm{T}}\\\mathbf{v_2^\mathrm{T}}\\\vdots\\\mathbf{v_n^\mathrm{T}}<br>\end{bmatrix}\\<br>&amp;=\left[ \begin{array}{lllllll}{\sigma_{1} \mathbf{u}_{1}} &amp; {\sigma_{2} \mathbf{u}_{2}} &amp; {\cdots} &amp; {\sigma_{r} \mathbf{u}_{r}} &amp; {\mathbf{0}} &amp; {\cdots} &amp; {\mathbf{0}}\end{array}\right] \left[ \begin{array}{c}{\mathbf{v}_{1}^{T}} \ {\mathbf{v}_{2}^{T}} \ {\vdots} \ {\mathbf{v}_{n}^{T}}\end{array}\right]\\<br>&amp;=\sigma_{1} \mathbf{u}_{1} \mathbf{v}_{1}^{T}+\sigma_{2} \mathbf{u}_{2} \mathbf{v}_{2}^{T}+\cdots+\sigma_{r} \mathbf{u}_{r} \mathbf{v}_{r}^{T}<br>\end{split}<br>\end{align}<br>$$<br>这个式子说明了原矩阵A仅由U的前r个行向量，$V^T$的前r个列向量，以及$\Sigma$左上$r\times r$分块矩阵决定。其称为瘦奇异值分解：</p>
 <p><img src="svd2.jpg" alt="瘦奇异值分解"></p>
@@ -451,7 +452,7 @@
 <ul>
 <li>矩阵V的列向量（右奇异向量）是方阵$M^{\star} M$的特征向量</li>
 <li>矩阵U的列向量（右奇异向量）是方阵$M M^{\star}​$的特征向量</li>
-<li>$\Sigma$的非零对角元素（非零奇异值）是$M^{\star} M$或者$M M^{\star}$的非零特征值的平方根。</li>
+<li>$\Sigma$的非零对角元素（非零奇异值）是$M^{\star} M$或者$M M^{\star}​$的非零特征值的平方根。</li>
 </ul>
 <h2 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h2><p>下面举一个简单的例子来说明奇异值分解的计算程序，考虑如下矩阵：<br>$$<br>\begin{align}<br>A=<br>\begin{bmatrix}<br>{1} &amp; {0} &amp; {0} &amp; {0} &amp; {2}\\<br>{0} &amp; {0} &amp; {3} &amp; {0} &amp; {0}\\<br>{0} &amp; {0} &amp; {0} &amp; {0} &amp; {0}\\<br>{0} &amp; {4} &amp; {0} &amp; {0} &amp; {0}<br>\end{bmatrix}<br>\end{align}<br>$$<br><strong>STEP1:</strong>计算矩阵与自身转置相乘：<br>$$<br>\begin{align}<br>A^{T} A=<br>\begin{bmatrix}<br>{1} &amp; {0} &amp; {0} &amp; {0} &amp; {2}\\<br>{0} &amp; {16} &amp; {0} &amp; {0} &amp; {0}\\<br>{0} &amp; {0} &amp; {9} &amp; {0} &amp; {0}\\<br>{0} &amp; {0} &amp; {0} &amp; {0} &amp; {0}\\<br>{2} &amp; {0} &amp; {0} &amp; {0} &amp; {4}<br>\end{bmatrix}<br>\end{align}<br>$$<br><strong>STPE2:</strong>求$A^{T} A$的特征值与对应的特征向量，将特征值从大到小排列：<br>$$<br>\lambda_{1}=16, \lambda_{2}=9, \lambda_{3}=5, \lambda_{4}=0, \lambda_{5}=0<br>$$<br>对应的单位特征向量依次为：<br>$$<br>\begin{align}<br>\mathbf{v}_{1}=<br>\begin{bmatrix}<br>{0} \\{1} \\{0}\\{0} \\{0}<br>\end{bmatrix}<br>, \mathbf{v}_{2}=<br>\begin{bmatrix}<br>{0} \\{0} \\{1} \\{0} \\{0}<br>\end{bmatrix}<br>, \mathbf{v}_{3}=<br>\begin{bmatrix}<br>{\sqrt{0.2}} \\{0} \\{0} \\{0} \\{\sqrt{0.8}}<br>\end{bmatrix}<br>, \mathbf{v}_{4}=<br>\begin{bmatrix}<br>{0} \\{0} \\{0} \\{1} \\{0}<br>\end{bmatrix}<br>, \mathbf{v}_{5}=<br>\begin{bmatrix}<br>{-\sqrt{0.8}} \\{0} \\{0} \\{0} \\\sqrt{0.2}<br>\end{bmatrix}<br>\end{align}<br>$$<br>则由上面的几个性质可知，非零奇异值为$\sigma_{1}=\sqrt{\lambda_{1}}=4, \sigma_{2}=\sqrt{\lambda_{2}}=3, \sigma_{3}=\sqrt{\lambda_{3}}=\sqrt{5}$</p>
 <p><strong>STEP3:</strong>设定$\Sigma$和$V$:<br>$$<br>\begin{align}<br>\Sigma=<br>\begin{bmatrix}<br>{4} &amp; {0} &amp; {0} &amp; {0} &amp; {0} \\<br>{0} &amp; {3} &amp; {0} &amp; {0} &amp; {0} \\<br>{0} &amp; {0} &amp; {\sqrt{5}} &amp; {0} &amp; {0} \\<br>{0} &amp; {0} &amp; {0} &amp; {0} &amp; {0}<br>\end{bmatrix}<br>\end{align}<br>$$</p>
