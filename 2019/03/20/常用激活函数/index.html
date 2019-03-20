@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Deep Learning,Machine Learning," />
 
 
 
@@ -90,16 +90,24 @@
 
 
 
-<meta name="description" content="瞎写">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Pjskd1&#39;s LOG">
-<meta property="og:url" content="http://yoursite.com/archives/page/3/index.html">
+<meta name="description" content="激活函数Sigmoid函数$$f(x)=\frac{1}{1+e^{-x}}$$  Sigmoid激活函数与机器学习当中的逻辑回归函数的计算公式完全一样。它的取值的分布在0到1之间，并且非常平滑。其主要用在一些简单的二分类或者是隐藏层数比较少的网络结构当中。 优势：取值在0到1之间，在做相应分类结果的时候非常容易的根据输出来进行判断。 劣势：Sigmoid激活函数如果放在深层的网络结构当中的时候，">
+<meta name="keywords" content="Deep Learning,Machine Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用激活函数">
+<meta property="og:url" content="http://yoursite.com/2019/03/20/常用激活函数/index.html">
 <meta property="og:site_name" content="Pjskd1&#39;s LOG">
-<meta property="og:description" content="瞎写">
+<meta property="og:description" content="激活函数Sigmoid函数$$f(x)=\frac{1}{1+e^{-x}}$$  Sigmoid激活函数与机器学习当中的逻辑回归函数的计算公式完全一样。它的取值的分布在0到1之间，并且非常平滑。其主要用在一些简单的二分类或者是隐藏层数比较少的网络结构当中。 优势：取值在0到1之间，在做相应分类结果的时候非常容易的根据输出来进行判断。 劣势：Sigmoid激活函数如果放在深层的网络结构当中的时候，">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/03/20/常用激活函数/激活函数1.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/20/常用激活函数/激活函数2.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/20/常用激活函数/激活函数3.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/20/常用激活函数/激活函数4.png">
+<meta property="og:image" content="http://yoursite.com/2019/03/20/常用激活函数/激活函数5.png">
+<meta property="og:updated_time" content="2019-03-20T06:36:21.858Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pjskd1&#39;s LOG">
-<meta name="twitter:description" content="瞎写">
+<meta name="twitter:title" content="常用激活函数">
+<meta name="twitter:description" content="激活函数Sigmoid函数$$f(x)=\frac{1}{1+e^{-x}}$$  Sigmoid激活函数与机器学习当中的逻辑回归函数的计算公式完全一样。它的取值的分布在0到1之间，并且非常平滑。其主要用在一些简单的二分类或者是隐藏层数比较少的网络结构当中。 优势：取值在0到1之间，在做相应分类结果的时候非常容易的根据输出来进行判断。 劣势：Sigmoid激活函数如果放在深层的网络结构当中的时候，">
+<meta name="twitter:image" content="http://yoursite.com/2019/03/20/常用激活函数/激活函数1.png">
 
 
 
@@ -127,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/page/3/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/03/20/常用激活函数/"/>
 
 
 
 
 
-  <title> 归档 | Pjskd1's LOG </title>
+  <title> 常用激活函数 | Pjskd1's LOG </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -167,7 +175,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -305,186 +313,216 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 24 篇日志。 继续努力。
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/常用激活函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Pjskd1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Pjskd1's LOG">
     </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                常用激活函数
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-20T15:33:58+09:00">
+                2019-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/20/常用激活函数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/03/20/常用激活函数/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body han-init-context" itemprop="articleBody">
 
       
       
-      
 
+      
+        <h2 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h2><h3 id="Sigmoid函数"><a href="#Sigmoid函数" class="headerlink" title="Sigmoid函数"></a>Sigmoid函数</h3><p>$$<br>f(x)=\frac{1}{1+e^{-x}}<br>$$</p>
+<p><img src="激活函数1.png" alt="激活函数1"></p>
+<p>Sigmoid激活函数与机器学习当中的逻辑回归函数的计算公式完全一样。它的取值的分布在0到1之间，并且非常平滑。其主要用在一些简单的二分类或者是隐藏层数比较少的网络结构当中。</p>
+<p><strong>优势：</strong>取值在0到1之间，在做相应分类结果的时候非常容易的根据输出来进行判断。</p>
+<p><strong>劣势：</strong>Sigmoid激活函数如果放在深层的网络结构当中的时候，进行相应的梯度或者权重值修改的时候，容易引发梯度消散的问题。具体原因是因为Sigmoid激活函数的到函数在$x=0$时达到最大值$\frac{1}{4}$。如果我们使用标准方法来初始化网络中的权重，那么会使用一个均值为0标准差为1的高斯分布，我们会发现，$w_{j} \sigma^{\prime}\left(z_{j}\right)&lt;\frac{1}{4}$，所以在进行所有这些项的乘积时，最终结果肯定会指数及下降，项越多，乘积下降的也就越快。 </p>
+<a id="more"></a>
+<h3 id="tanh函数"><a href="#tanh函数" class="headerlink" title="tanh函数"></a>tanh函数</h3><p>$$<br>\tanh x=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}<br>$$</p>
+<p><img src="激活函数2.png" alt="激活函数2"></p>
+<p>对比Sigmoid函数，tanh函数的取值范围在-1到1之间，并且平均值为0。这些都是非常好的性质。不像Sigmoid函数只有0以上的增长的过程，没有下降的过程。我们经常在RNN循环神经网络结构中使用这个激活函数。</p>
+<h3 id="Softsign函数"><a href="#Softsign函数" class="headerlink" title="Softsign函数"></a>Softsign函数</h3><p>$$<br>f(x)=\frac{x}{|x|+1}<br>$$</p>
+<p><img src="激活函数3.png" alt="激活函数3"></p>
+<p>取值区间与tanh相同在-1与1之间。</p>
+<h3 id="ReLU函数"><a href="#ReLU函数" class="headerlink" title="ReLU函数"></a>ReLU函数</h3><p>$$<br>y=\left\{\begin{array}{ll}{x,} &amp; {x \geq 0} \ {0,} &amp; {x&lt;0}\end{array}\right.<br>$$</p>
+<p><img src="激活函数4.png" alt="激活函数4"></p>
+<p>这个激活函数在业务中使用的是最多的，而且从应用来看效果是最好的一个。ReLU激活函数有一个特别明显的特征：当x取值小于0的时候对应的y值恒等于0；当x大于等于0时，对应的y取x。也就是说：当取值为正向的时候感知器才会进行相应的采纳，当取值为负向的反面的时候那么感知器会将其映射到0.</p>
+<h3 id="Softplus函数"><a href="#Softplus函数" class="headerlink" title="Softplus函数"></a>Softplus函数</h3><p>$$<br>f(x)=\ln \left(e^{x}+1\right)<br>$$</p>
+<p><img src="激活函数5.png" alt="激活函数5"></p>
+<p>这个函数与ReLU激活函数很相似，但是Softplus函数在输出值从0到正无穷的过程中，不像ReLU有一个明确的拐点，而是有一个平滑的过度。这个激活函数使用相对较少。</p>
+<h3 id="激活函数设计需考虑的因素"><a href="#激活函数设计需考虑的因素" class="headerlink" title="激活函数设计需考虑的因素"></a>激活函数设计需考虑的因素</h3><ol>
+<li>非线性：如果是线性的话，那么整个网络则相当于一个单层的线性模型，不能很好的工作。</li>
+<li>连续可微：这个属性对于基于梯度优化的算法来说是必要的。</li>
+<li>有界性：如果激活函数是有界的，那么基于梯度的训练方法往往更加稳定。如果是无界的那么训练往往更加有效率，但是训练容易发散。此时可以适当减小学习率。</li>
+<li>单调性：如果激活函数是单调的，与单层模型相关的损失函数是凸的。</li>
+<li>平滑性：有单调导数的激活函数已经被证明在某些情况下泛化效果更好。</li>
+<li>原点附近近似的Identity（$f(x) \approx x$）：当激活函数有这个特点时，对于小的随机初始化权重神经网络能够更加有效的学习。否则在初始化权重时往往需要考虑一些特殊的设计。</li>
+</ol>
+
+      
+    </div>
+
+    <div>
       
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
         </div>
       
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/02/10/Linux中gdb工具的使用/" itemprop="url">
-              
-                <span itemprop="name">Linux中gdb工具的使用</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-02-10T15:21:50+09:00"
-              content="2017-02-10" >
-          02-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/02/03/火车与故乡/" itemprop="url">
-              
-                <span itemprop="name">火车与故乡</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-02-03T10:27:23+09:00"
-              content="2017-02-03" >
-          02-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/01/16/LaTeX中图片的引用方法/" itemprop="url">
-              
-                <span itemprop="name">LaTeX中图片的引用方法</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-01-16T16:36:33+09:00"
-              content="2017-01-16" >
-          01-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
 
       
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/20/感知器及其训练法则/" rel="next" title="感知器及其训练法则">
+                <i class="fa fa-chevron-left"></i> 感知器及其训练法则
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
         </div>
       
-      
 
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/11/17/每个人的生活习惯/" itemprop="url">
-              
-                <span itemprop="name">每个人的生活习惯</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-17T14:29:35+09:00"
-              content="2016-11-17" >
-          11-17
-        </time>
-      </div>
-
-    </header>
+      
+    </footer>
   </article>
 
 
 
-    
-
-  </section>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
-
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -492,6 +530,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -511,8 +560,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpg"
@@ -603,6 +661,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#激活函数"><span class="nav-number">1.</span> <span class="nav-text">激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sigmoid函数"><span class="nav-number">1.1.</span> <span class="nav-text">Sigmoid函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tanh函数"><span class="nav-number">1.2.</span> <span class="nav-text">tanh函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Softsign函数"><span class="nav-number">1.3.</span> <span class="nav-text">Softsign函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReLU函数"><span class="nav-number">1.4.</span> <span class="nav-text">ReLU函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Softplus函数"><span class="nav-number">1.5.</span> <span class="nav-text">Softplus函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#激活函数设计需考虑的因素"><span class="nav-number">1.6.</span> <span class="nav-text">激活函数设计需考虑的因素</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -723,7 +797,9 @@
 
 
   
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
 
 
   
@@ -742,6 +818,18 @@
       <script id="dsq-count-scr" src="https://https-pjskd1-github-io.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/03/20/常用激活函数/';
+          this.page.identifier = '2019/03/20/常用激活函数/';
+          this.page.title = '常用激活函数';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-pjskd1-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
