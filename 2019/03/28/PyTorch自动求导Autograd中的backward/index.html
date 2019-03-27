@@ -1,0 +1,1071 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans,en,ja,default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="xF6uYrMOkD_u5JmQ8R0Kd9-Rpim-QsToUIxGg6Jdlz0" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Deep Learning,Machine Learning,PyTorch," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="PyTorch自动求导Autograd中的backward首先简明要点。  PyTorch 中所有神经网络的核心是autograd包。 autograd包为张量上所有的操作提供了自动求导。 torch.Tensor是这个包的核心类。如果设置.requires_grad = True，那么将会追踪对于该张量的操作。当完成计算后，通过调用.backward()，自动计算所有梯度，而这个张量的所有梯度将">
+<meta name="keywords" content="Deep Learning,Machine Learning,PyTorch">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PyTorch自动求导Autograd中的backward">
+<meta property="og:url" content="http://yoursite.com/2019/03/28/PyTorch自动求导Autograd中的backward/index.html">
+<meta property="og:site_name" content="Pjskd1&#39;s LOG">
+<meta property="og:description" content="PyTorch自动求导Autograd中的backward首先简明要点。  PyTorch 中所有神经网络的核心是autograd包。 autograd包为张量上所有的操作提供了自动求导。 torch.Tensor是这个包的核心类。如果设置.requires_grad = True，那么将会追踪对于该张量的操作。当完成计算后，通过调用.backward()，自动计算所有梯度，而这个张量的所有梯度将">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-27T15:38:51.090Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PyTorch自动求导Autograd中的backward">
+<meta name="twitter:description" content="PyTorch自动求导Autograd中的backward首先简明要点。  PyTorch 中所有神经网络的核心是autograd包。 autograd包为张量上所有的操作提供了自动求导。 torch.Tensor是这个包的核心类。如果设置.requires_grad = True，那么将会追踪对于该张量的操作。当完成计算后，通过调用.backward()，自动计算所有梯度，而这个张量的所有梯度将">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/28/PyTorch自动求导Autograd中的backward/"/>
+
+
+
+
+
+  <title> PyTorch自动求导Autograd中的backward | Pjskd1's LOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-97728634-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Pjskd1's LOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录我的生活</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/28/PyTorch自动求导Autograd中的backward/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Pjskd1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Pjskd1's LOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                PyTorch自动求导Autograd中的backward
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-28T00:36:45+09:00">
+                2019-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/28/PyTorch自动求导Autograd中的backward/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/03/28/PyTorch自动求导Autograd中的backward/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="PyTorch自动求导Autograd中的backward"><a href="#PyTorch自动求导Autograd中的backward" class="headerlink" title="PyTorch自动求导Autograd中的backward"></a>PyTorch自动求导Autograd中的backward</h1><p>首先简明要点。</p>
+<ul>
+<li>PyTorch 中所有神经网络的核心是<code>autograd</code>包。</li>
+<li><code>autograd</code>包为张量上所有的操作提供了自动求导。</li>
+<li><code>torch.Tensor</code>是这个包的核心类。如果设置<code>.requires_grad = True</code>，那么将会追踪对于该张量的操作。当完成计算后，通过调用<code>.backward()</code>，自动计算所有梯度，而这个张量的所有梯度将会自动积累到<code>.grad</code>属性。</li>
+</ul>
+<a id="more"></a>
+<p>另外在自动梯度计算包中还有一个重要的类<code>Function</code>。</p>
+<blockquote>
+<p><code>Tensor</code> and <code>Function</code> are interconnected and build up an acyclic graph, that encodes a complete history of computation. Each tensor has a <code>.grad_fn</code> attribute that references a <code>Function</code> that has created the <code>Tensor</code> (except for Tensors created by the user - their <code>grad_fn is None</code>).</p>
+</blockquote>
+<p>Tensor 和 Function 相互连接并生成一个非循环图，它表示和储存了完整的计算历史。每个张量都有一个<code>.grad_fn</code>属性，这个属性引用了一个创建了Tensor的Function（除非这个张量是用户手动创建的，即，这个张量的<code>grad_fn</code>是<code>None</code>）。</p>
+<p>如果需要计算导数，你可以在<code>Tensor</code>上调用<code>.backward()</code>。 如果<code>Tensor</code>是一个标量（即它包含一个元素数据）则不需要为<code>backward()</code>指定任何参数， 但是如果它有更多的元素，你需要指定一个<code>gradient</code> 参数来匹配张量的形状。</p>
+<p>起初我对上面的这些描述也是一头雾水，因为看不懂的名词和参数太多了，但是没有关系，google给我们colab这么好用的工具，不用一下是不是可惜了。对于一些基本的东西我们还是要有一定的了解，比如说<code>backward</code>只能够作用在一个标量上（也就是只有一个维度的张量），或者在使用<code>backward</code>的时候给定一个特定的张量来确保输出梯度的形状。对于自动求导<code>autograd</code>这个包需要注意的是可能有很多人会将张量包含在一个<code>variable</code>中以便于自动梯度计算，但是<code>variable</code>已经在0.41版中被标注称为过期了，现在可以直接使用tensor。</p>
+<blockquote>
+<p>The Variable API has been deprecated: Variables are no longer necessary to use autograd with tensors. Autograd automatically supports Tensors with <code>requires_grad</code> set to <code>True</code>. Below please find a quick guide on what has changed:</p>
+<ul>
+<li><code>Variable(tensor)</code> and <code>Variable(tensor, requires_grad)</code> still work as expected, but they return Tensors instead of Variables.</li>
+<li><code>var.data</code> is the same thing as <code>tensor.data</code>.</li>
+<li>Methods such as <code>var.backward(), var.detach(), var.register_hook()</code> now work on tensors with the same method names.</li>
+</ul>
+<p>In addition, one can now create tensors with <code>requires_grad=True</code> using factory methods such as <a href="https://pytorch.org/docs/stable/torch.html#torch.randn" target="_blank" rel="noopener"><code>torch.randn()</code></a>, <a href="https://pytorch.org/docs/stable/torch.html#torch.zeros" target="_blank" rel="noopener"><code>torch.zeros()</code></a>, <a href="https://pytorch.org/docs/stable/torch.html#torch.ones" target="_blank" rel="noopener"><code>torch.ones()</code></a>, and others like the following:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; autograd_tensor = torch.randn((<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>), requires_grad=<span class="keyword">True</span>)</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+</blockquote>
+<p>下面是一些测试：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">a = torch.tensor([<span class="number">2</span>, <span class="number">3</span>], dtype=torch.float, requires_grad=<span class="keyword">True</span>)</span><br><span class="line">b = a + <span class="number">3</span></span><br><span class="line">c = b * b * <span class="number">3</span></span><br><span class="line">out = c.mean()</span><br><span class="line">out.backward()</span><br><span class="line">print(<span class="string">'input'</span>)</span><br><span class="line">print(a.data)</span><br><span class="line">print(<span class="string">'compute result is'</span>)</span><br><span class="line">print(out.data)</span><br><span class="line">print(<span class="string">'input gradients are'</span>)</span><br><span class="line">print(a.grad)</span><br></pre></td></tr></table></figure>
+<p>输出结果是这样的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">input</span><br><span class="line">tensor([2., 3.])</span><br><span class="line">compute result is</span><br><span class="line">tensor(91.5000)</span><br><span class="line">input gradients are</span><br><span class="line">tensor([15., 18.])</span><br></pre></td></tr></table></figure>
+<p>简单的问题我们可以用手算来验证一下，比如所我们传入的参数为$m=(m_1=2,m_2 = 3)$。这里有一点需要注意对于每一个张量对象，都有参数<code>requires_grad</code>参数，默认为<code>False</code>，这里我们手动赋值<code>requires_grad=True</code>让其称为一个叶子节点。我们可以推算出<br>$$<br>o u t=\frac{3\left(\left(m_{1}+3\right)^{2}+\left(m_{2}+3\right)^{2}\right)}{2}<br>$$<br>接下来我们求偏导<br>$$<br>\frac{\partial out}{\partial m_{1}}=3\left(m_{1}+3\right)|m_{1}=2=15 , \quad \frac{\partial out}{\partial m_{2}}=3\left(m_{2}+3\right)|m_{2}=3=18<br>$$<br>这就是我们想要求得的结果，与程序结果一致，通过。</p>
+<p>接下我们研究对非标量使用<code>backward</code>，下面是实验：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">m = torch.tensor([[<span class="number">2</span>, <span class="number">3</span>]], dtype=torch.float, requires_grad=<span class="keyword">True</span>)</span><br><span class="line">print( m )</span><br><span class="line">n = torch.zeros(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">print( n )</span><br><span class="line">n[<span class="number">0</span>, <span class="number">0</span>] = m[<span class="number">0</span>, <span class="number">0</span>] ** <span class="number">2</span></span><br><span class="line">n[<span class="number">0</span>, <span class="number">1</span>] = m[<span class="number">0</span>, <span class="number">1</span>] ** <span class="number">3</span></span><br><span class="line">print( n )</span><br><span class="line">print(m.grad_fn)</span><br><span class="line">print(n.grad_fn)</span><br><span class="line">print(n.requires_grad)</span><br><span class="line">n.backward(m.data)</span><br><span class="line">print(m.grad)</span><br></pre></td></tr></table></figure>
+<p>可以发现在程序中做了非常多的输出，是为了方便确认网络结构（虽然完全称不上网络… …，逃）</p>
+<p>输出结果</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tensor([[2., 3.]], requires_grad=True)</span><br><span class="line">tensor([[0., 0.]])</span><br><span class="line">tensor([[ 4., 27.]], grad_fn=&lt;CopySlices&gt;)</span><br><span class="line">None</span><br><span class="line">&lt;CopySlices object at 0x7f5882fa0e80&gt;</span><br><span class="line">True</span><br><span class="line">tensor([[ 8., 81.]])</span><br></pre></td></tr></table></figure>
+<p>首先我们定义了输入$m=\left(x_{1}, x_{2}\right)=(2,3)$，将其运算传入n有$n=\left(x_{1}^{2}, x_{2}^{3}\right)$，简单的求出偏导数$\frac{\partial n_{1}}{\partial x_{1}}=2 x_{1}=4, \frac{\partial n_{2}}{\partial x_{2}}=3 x_{2}^{2}=27$。我们会发现，这里输出的梯度张量… …完全不对啊啊啊啊啊摔！观察数据可以发现，这里输出的梯度与应该得到的梯度，其中中间只差了一个乘法因子，而这个因子就是我们在<code>backward</code>时传入的<code>m.data</code>张量。经过了其他的一些测试，可以发现传入的矩阵其实就是求导是的系数矩阵。那我们就可以想到了，如果输入一个元素全为1的张量，那就可以得到正确的梯度张量了。接下来我们稍微更改一下程序。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">m = torch.tensor([[<span class="number">2</span>, <span class="number">3</span>]], dtype=torch.float, requires_grad=<span class="keyword">True</span>)</span><br><span class="line">print( m )</span><br><span class="line">n = torch.zeros(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">print( n )</span><br><span class="line">n[<span class="number">0</span>, <span class="number">0</span>] = m[<span class="number">0</span>, <span class="number">0</span>] ** <span class="number">2</span></span><br><span class="line">n[<span class="number">0</span>, <span class="number">1</span>] = m[<span class="number">0</span>, <span class="number">1</span>] ** <span class="number">3</span></span><br><span class="line">print( n )</span><br><span class="line">print(m.grad_fn)</span><br><span class="line">print(n.grad_fn)</span><br><span class="line">print(n.requires_grad)</span><br><span class="line">print(m.data)</span><br><span class="line">k = torch.tensor([[<span class="number">1</span>, <span class="number">1</span>]])</span><br><span class="line">print(k)</span><br><span class="line">n.backward(torch.tensor([[<span class="number">1</span>, <span class="number">1</span>]], dtype=torch.float))</span><br><span class="line">print(m.grad)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tensor([[2., 3.]], requires_grad=True)</span><br><span class="line">tensor([[0., 0.]])</span><br><span class="line">tensor([[ 4., 27.]], grad_fn=&lt;CopySlices&gt;)</span><br><span class="line">None</span><br><span class="line">&lt;CopySlices object at 0x7f5882fa0e80&gt;</span><br><span class="line">True</span><br><span class="line">tensor([[2., 3.]])</span><br><span class="line">tensor([[1, 1]])</span><br><span class="line">tensor([[ 4., 27.]])</span><br></pre></td></tr></table></figure>
+<p>果然得到了正确的答案。（虽然结果暂且对应上了，但这并不是正确的解释）</p>
+<p>上面是完全线性不相关的情况，下面我们来看一下耦合时会发生怎样的变化。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">m = v(torch.tensor([[<span class="number">2</span>, <span class="number">3</span>]], dtype=torch.float), requires_grad=<span class="keyword">True</span>)</span><br><span class="line">j = torch.zeros(<span class="number">2</span> ,<span class="number">2</span>)</span><br><span class="line">k = v(torch.zeros(<span class="number">1</span>, <span class="number">2</span>))</span><br><span class="line">print(m)</span><br><span class="line">print(j)</span><br><span class="line">print(k)</span><br><span class="line">k[<span class="number">0</span>, <span class="number">0</span>] = m[<span class="number">0</span>, <span class="number">0</span>] ** <span class="number">2</span> + <span class="number">3</span> * m[<span class="number">0</span> ,<span class="number">1</span>]</span><br><span class="line">k[<span class="number">0</span>, <span class="number">1</span>] = m[<span class="number">0</span>, <span class="number">1</span>] ** <span class="number">2</span> + <span class="number">2</span> * m[<span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">print(k)</span><br></pre></td></tr></table></figure>
+<p>首先设定了这样的输入$m=\left(x_{1}=2, x_{2}=3\right),  k=\left(x_{1}^{2}+3 x_{2}, x_{2}^{2}+2 x_{1}\right)$。首先我们来手动计算一下结果：<br>$$<br>\frac{\partial\left(x_{1}^{2}+3 x_{2}\right)}{\partial x_{1}}=2 x_{1}=4, \frac{\partial\left(x_{1}^{2}+3 x_{2}\right)}{\partial x_{2}}=3<br>$$</p>
+<p>$$<br>\frac{\partial\left(x_{2}^{2}+2 x_{1}\right)}{\partial x_{1}}=2, \frac{\partial\left(x_{2}^{2}+2 x_{1}\right)}{\partial x_{2}}=2 x_{2}=6<br>$$</p>
+<p>可见我们求出来的Jacobian就是<br>$$<br>\begin{align}<br>\mathbb{J} =<br>\begin{bmatrix}<br>4 &amp; 3\\<br>2 &amp; 6<br>\end{bmatrix}<br>\end{align}<br>$$<br>接下来我们来验证一下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">k.backward(torch.tensor([[<span class="number">1</span>, <span class="number">1</span>]], dtype=torch.float))</span><br><span class="line">print(m.grad)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tensor([[6., 9.]])</span><br></pre></td></tr></table></figure>
+<p>这个答案显然不对，甚至连形状都不对，其实出的错误主要在于<code>backward</code>是给定的张量参数不对，<code>k.backward(parameters)</code>中的参数张量一定要与k的形状一样才可以。<strong>那么我们这里给定的这个张量参数是什么意思呢？</strong></p>
+<p>首先我们去找官方的文档，可以找到</p>
+<blockquote>
+<p><code>backward(gradient=None, retain_graph=None, create_graph=False)</code></p>
+<p>Computes the gradient of current tensor w.r.t. graph leaves.</p>
+<p>The graph is differentiated using the chain rule. If the tensor is non-scalar (i.e. its data has more than one element) and requires gradient, the function additionally requires specifying <code>gradient</code>. It should be a tensor of matching type and location, that contains the gradient of the differentiated function w.r.t. <code>self</code>.</p>
+<p>This function accumulates gradients in the leaves - you might need to zero them before calling it.</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><strong>gradient</strong> (<a href="https://pytorch.org/docs/stable/tensors.html#torch.Tensor" target="_blank" rel="noopener"><em>Tensor</em></a> <em>or</em> <a href="https://docs.python.org/3/library/constants.html#None" target="_blank" rel="noopener"><em>None</em></a>) – Gradient w.r.t. the tensor. If it is a tensor, it will be automatically converted to a Tensor that does not require grad unless <code>create_graph</code> is True. None values can be specified for scalar Tensors or ones that don’t require grad. If a None value would be acceptable then this argument is optional.</li>
+<li><strong>retain_graph</strong> (<a href="https://docs.python.org/3/library/functions.html#bool" target="_blank" rel="noopener"><em>bool</em></a><em>,</em> <em>optional</em>) – If <code>False</code>, the graph used to compute the grads will be freed. Note that in nearly all cases setting this option to True is not needed and often can be worked around in a much more efficient way. Defaults to the value of <code>create_graph</code>.</li>
+<li><strong>create_graph</strong> (<a href="https://docs.python.org/3/library/functions.html#bool" target="_blank" rel="noopener"><em>bool</em></a><em>,</em> <em>optional</em>) – If <code>True</code>, graph of the derivative will be constructed, allowing to compute higher order derivative products. Defaults to <code>False</code>.</li>
+</ul>
+</blockquote>
+<p>这段文档的重点是：当我们对一个scalar自动求导数的时候不需要指定<code>gradient</code>参数，而对non-scale求导时则需要指定一个与<code>backward</code>对象完全对应的<code>gradient</code>张量。这是为了什么呢？我们可以想一下，对一个scale求导我们很简单就可以想象，像上面这个例子，一个二阶tensor对一个二阶tensor求导，我们也可以做的出来，结果就是一个雅可比矩阵，并没有什么特殊的，但是，在深度学习中，通常我们遇到的张量都是高阶的，假设我们要使四阶tensor对tensor求导，你能够想象出来结果是什么形状吗？所以Pytorch很简单的规定，不让tensor对tensor求导，只允许标量scalar对张量tensor求导，并且自然而然的求导的结果是与这个tensor相同形状的tensor。那么想到这里，上面的这个<code>gradient</code>张量参数的作用就呼之欲出，其实就是为了将<code>backward</code>对象的tensor变成标量scalar。变的方法就是列多项式求和，而这个多项式的参数就是我们给定的<code>gradient</code>张量中的每一个对应的元素。</p>
+<p>我们结合上边的例子看一下，有$m=\left(x_{1}=2, x_{2}=3\right),  k=\left(x_{1}^{2}+3 x_{2}, x_{2}^{2}+2 x_{1}\right)$，我们在<code>backward</code>中给定了<code>gradient</code>参数$(1, 1)$，则有和式<br>$$<br>\sum = 1\times (x_1^2+3x_2)+1\times (x_2^2+2x_1)<br>$$<br>接下来，这个和式分别对$x_1, x_2$求偏导<br>$$<br>\frac{\partial\sum}{\partial x_1}=2x_1+2|_{x_1=2}=6<br>$$</p>
+<p>$$<br>\frac{\partial\sum}{\partial x_2}=2x_2+3|_{x_2=3}=9<br>$$</p>
+<p>这样就得到了上面的那个原来看似错误的答案。</p>
+<p>理解了这个地方之后，我们要求Jacobian就很简单了，将上面<code>backward</code>部分的代码更改如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">k.backward(torch.tensor([[<span class="number">1</span>, <span class="number">0</span>]], dtype=torch.float), retain_graph=<span class="keyword">True</span>)</span><br><span class="line">j[<span class="number">0</span>] = m.grad</span><br><span class="line">m.grad = torch.zeros_like(m.grad)</span><br><span class="line">k.backward(torch.tensor([[<span class="number">0</span>, <span class="number">1</span>]], dtype=torch.float))</span><br><span class="line">j[<span class="number">1</span>] = m.grad</span><br><span class="line">print(<span class="string">'jacobian is'</span>)</span><br><span class="line">print(j)</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jacobian is</span><br><span class="line">tensor([[4., 2.],</span><br><span class="line">        [3., 6.]])</span><br></pre></td></tr></table></figure>
+<p>成功的输出了Jacobian。这里我们注意到在<code>backward</code>函数中还有参数<code>retain_graph=True</code>，这个参数默认为<code>False</code>，根据官方文档我们可以知道经过反向传播之后计算图的内存会被释放掉，这样就没有第二次计算梯度张量了，所以我们这里设置为<code>True</code>，官方文档同时解释说，需要设置成<code>True</code>的情况几乎没有，一般让其保持默认以便获取更高计算性能。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li>PyTorch 的 backward 为什么有一个 grad_variables 参数？，<a href="https://zhuanlan.zhihu.com/p/29923090" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/29923090</a></li>
+<li>PyTorch的backward()相关理解，<a href="https://blog.csdn.net/douhaoexia/article/details/78821428" target="_blank" rel="noopener">https://blog.csdn.net/douhaoexia/article/details/78821428</a></li>
+<li>PyTorch Handbook-GitHub，<a href="https://github.com/zergtant/pytorch-handbook/blob/master/chapter1/2_autograd_tutorial.ipynb" target="_blank" rel="noopener">https://github.com/zergtant/pytorch-handbook/blob/master/chapter1/2_autograd_tutorial.ipynb</a></li>
+<li>AUTOMATIC DIFFERENTIATION PACKAGE - TORCH.AUTOGRAD，<a href="https://pytorch.org/docs/stable/autograd.html#variable-deprecated" target="_blank" rel="noopener">https://pytorch.org/docs/stable/autograd.html#variable-deprecated</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          
+            <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          
+            <a href="/tags/PyTorch/" rel="tag"># PyTorch</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/20/神经网络的种类/" rel="next" title="神经网络的种类">
+                <i class="fa fa-chevron-left"></i> 神经网络的种类
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Pjskd1" />
+          <p class="site-author-name" itemprop="name">Pjskd1</p>
+           
+              <p class="site-description motion-element" itemprop="description">瞎写</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Pjskd1" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100015773921039" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.weibo.com/u/2743249160?is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PyTorch自动求导Autograd中的backward"><span class="nav-number">1.</span> <span class="nav-text">PyTorch自动求导Autograd中的backward</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Pjskd1</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://https-pjskd1-github-io.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/03/28/PyTorch自动求导Autograd中的backward/';
+          this.page.identifier = '2019/03/28/PyTorch自动求导Autograd中的backward/';
+          this.page.title = 'PyTorch自动求导Autograd中的backward';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-pjskd1-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
