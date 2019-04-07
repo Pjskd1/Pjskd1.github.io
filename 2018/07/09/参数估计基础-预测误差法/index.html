@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Pjskd1&#39;s LOG">
 <meta property="og:description" content="最近在做有关于系统辨识的内容，虽然大学的时候上过系统辨识这门课，但是当时也是囫囵吞枣，并没有深入的研究与应用。现在突然让我拿出来用，还真有点无处下手。 利用这次机会把系统辨识里边的参数估计部分好好的复习一下。（或者说重新学习… …)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-07T05:57:29.481Z">
+<meta property="og:updated_time" content="2019-04-07T05:59:04.021Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="参数估计基础-预测误差法">
 <meta name="twitter:description" content="最近在做有关于系统辨识的内容，虽然大学的时候上过系统辨识这门课，但是当时也是囫囵吞枣，并没有深入的研究与应用。现在突然让我拿出来用，还真有点无处下手。 利用这次机会把系统辨识里边的参数估计部分好好的复习一下。（或者说重新学习… …)">
@@ -425,7 +425,7 @@
         <p>最近在做有关于系统辨识的内容，虽然大学的时候上过系统辨识这门课，但是当时也是囫囵吞枣，并没有深入的研究与应用。现在突然让我拿出来用，还真有点无处下手。</p>
 <p>利用这次机会把系统辨识里边的参数估计部分好好的复习一下。（或者说重新学习… …)</p>
 <a id="more"></a>
-<h2 id="评价函数"><a href="#评价函数" class="headerlink" title="评价函数"></a>评价函数</h2><p>参数估计的评价函数一般为以下形式<br>$$<br>\begin{equation}<br>    J_N(\mathbf{\theta}) = \frac{1}{N}\sum^N_{k=1}l(k, \mathbf{\theta}, \varepsilon(k,\mathbf{ \theta}))<br>\end{equation}<br>$$<br>其中的$ l(k, \theta, \varepsilon(k, \theta)) $为为了测量预测误差<br>$$<br>\begin{equation}<br>\varepsilon(k, \mathbf{\theta}) = y(k) - \hat{y}(k|\mathbf{\theta})<br>\end{equation}<br>$$<br>大小（距离）的值为正的值函数。</p>
+<h2 id="评价函数"><a href="#评价函数" class="headerlink" title="评价函数"></a>评价函数</h2><p>参数估计的评价函数一般为以下形式<br>$$<br>\begin{equation}<br>    J_N(\mathbf{\theta}) = \frac{1}{N}\sum^N_{k=1}l(k, \mathbf{\theta}, \varepsilon(k,\mathbf{ \theta}))<br>\end{equation}<br>$$<br>其中的$ l(k, \theta, \varepsilon(k, \theta)) $为测量预测误差<br>$$<br>\begin{equation}<br>\varepsilon(k, \mathbf{\theta}) = y(k) - \hat{y}(k|\mathbf{\theta})<br>\end{equation}<br>$$<br>大小（距离）的值为正的值函数。</p>
 <p>函数$l(k, \theta, \varepsilon(k, \theta))$ 具体采用什么范数取决于想要估计的不同的结果或者说目的。通常会采用2范数（最小二乘）或者是最大似然估计（最尤推定）的对数似然函数（尤度関数）。</p>
 <p>找出能使评价函数达到最小值的位置参数$\mathbf{\theta}$，这就是我们要求的估计参数 $\hat{\mathbf{\theta}}(N)$ 写成式子：<br>$$<br>\begin{equation}<br>\hat{\mathbf{\theta}}(N) = \arg\min\limits_{\mathbf{\theta}}J_N(\mathbf{\theta})<br>\end{equation}<br>$$<br>这里表达的就是就写能使函数$J_N$达到最小的时候的参数集合$\mathbf{\theta}$。</p>
 <p>以上利用由预测误差构成的评价函数，并且通过使此评价函数达到最小来估计待估参数的方法为预测误差法（PEM：Prediction Error Method）。在使用预测误差法的时候，根据系统模型与评价函数的选择的不同2可以有很多种不同的参数估计方法。例如，函数$l(k, \theta, \varepsilon(k, \theta))$ 为二次函数的时候：<br>$$<br>\begin{equation}<br>l(k, \theta, \varepsilon(k, \theta)) = \varepsilon^2(k, \mathbf{\theta})<br>\end{equation}<br>$$<br>这种情况的时候为最小二乘法（least-squares method, LS method）。</p>
