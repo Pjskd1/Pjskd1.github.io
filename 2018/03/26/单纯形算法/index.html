@@ -105,7 +105,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/03/26/单纯形算法/5.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/03/26/单纯形算法/6.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/03/26/单纯形算法/7.jpg">
-<meta property="og:updated_time" content="2019-03-07T07:54:09.166Z">
+<meta property="og:updated_time" content="2019-04-07T10:37:49.433Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单纯形算法">
 <meta name="twitter:description" content="线性规划(Linear Programming, LP)中的一种常见的经典的算法之一，而单纯型算法就是非常常用的用来解决这个问题的方法之一。 在中学的时候我们曾经简单的接触过线性规划，当时的做法基本上是在二维平面上做出图形，标出可行域，以固定斜率画直线簇。而往往最优解的地方是通过（凸）可行域的顶点。例如：$$\begin{aligned}\begin{split}\max&amp;amp; \quad x">
@@ -454,7 +454,7 @@
 <li><p>若存在取值无约束的变量，可以转变为两个非负变量的差值，例如：<br>$$<br>\begin{equation}<br>-\infty \leq x_k \leq +\infty \Rightarrow<br>\left\{<br>\begin{aligned}<br>x_k = x_m-x_n \\<br>x_m,x_n \geq 0 \\<br>\end{aligned}<br>\right.<br>\end{equation}<br>$$</p>
 </li>
 </ul>
-<h3 id="规范形式"><a href="#规范形式" class="headerlink" title="规范形式"></a>规范形式</h3><p>规范形式就是在标准形式的基础上添加人工变量，以便于在不容易的到初始基可行解的时候获取第一个初始可行解。详情见两阶段单纯型算法（两阶段单纯型算法（Two-Phase Simplex Method）。</p>
+<h3 id="规范形式"><a href="#规范形式" class="headerlink" title="规范形式"></a>规范形式</h3><p>规范形式就是在标准形式的基础上添加人工变量，以便于在不容易的到初始基可行解的时候获取第一个初始可行解。详情见两阶段单纯型算法（Two-Phase Simplex Method）。</p>
 <h2 id="凸多边形的最优解在顶点取得"><a href="#凸多边形的最优解在顶点取得" class="headerlink" title="凸多边形的最优解在顶点取得"></a>凸多边形的最优解在顶点取得</h2><p>下面我们来证明为什么最优解一定在顶点。</p>
 <p>考虑最小化问题，目标函数$\mathbf{c}^T \mathbf{x}​$，有一个在可行域内部的最优解$\mathbf{x}^{(0)}​$，因为凸多边形内幕任一点都可以表示成顶点的线性组合，即对于顶点$\mathbf{x}^{(k)}, k=1,2,\cdots,n​$，有<br>$$<br>\mathbf{x}^{(0)}=\sum_{k=1}^{n}\lambda_k\mathbf{x}^{(k)}, \\<br>\sum_{k=1}^n \lambda_k=1<br>$$<br>假设$\mathbf{x}^{(i)}$是所有顶点中使得目标函数$\mathbf{c}^T \mathbf{x}$最小的顶点，那么<br>$$<br>\begin{equation}<br>\begin{split}<br>\mathbf{c}^T\mathbf{x}^{(0)} &amp;= \sum_{k=1}^{n}\lambda_k\mathbf{c}^T\mathbf{x}^{(k)} \\<br>&amp;\geq \sum_{k=1}^{n}\lambda_k\mathbf{c}^T\mathbf{x}^{(i)} \\<br>&amp;= \mathbf{c}^T\mathbf{x}^{(i)}<br>\end{split}<br>\end{equation}<br>$$<br>因此，总有一个顶点，它的目标函数值不比内部的点差。</p>
 <h2 id="如何得到凸多边形顶点"><a href="#如何得到凸多边形顶点" class="headerlink" title="如何得到凸多边形顶点"></a>如何得到凸多边形顶点</h2><p>下面要说明的定理是：对于可行域方程组$\mathbf{Ax=b}$，该方程确定的凸多边形的任意一个顶点对应$\mathbf{A}$的一组基底。</p>
