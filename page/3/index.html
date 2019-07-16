@@ -317,6 +317,165 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/25/LaTeX中加入表格的方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Pjskd1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Pjskd1's LOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/25/LaTeX中加入表格的方法/" itemprop="url">
+                  LaTeX中加入表格的方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-25T13:08:25+09:00">
+                2017-04-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LaTeX/" itemprop="url" rel="index">
+                    <span itemprop="name">LaTeX</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/25/LaTeX中加入表格的方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/04/25/LaTeX中加入表格的方法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>闲话少叙，直接上代码：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">documentclass</span><span class="string">&#123;article&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">&#123;multirou&#125;</span></span></span><br><span class="line"></span><br><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">&#123;document&#125;</span></span></span><br><span class="line">正文</span><br><span class="line"><span class="comment">%从这里开始是表格</span></span><br><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">&#123;table&#125;</span><span class="string">[tbp]</span></span> <span class="comment">%表格在文章中的位置设置</span></span><br><span class="line"><span class="tag">\<span class="name">centering</span></span>  <span class="comment">% 表居中</span></span><br><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">&#123;tabular&#125;</span><span class="string">&#123;|c|c|c|c|&#125;</span></span> </span><br><span class="line"><span class="comment">% &#123;|c|c|c|c|&#125;这里表示表格一共有4列，并表示各列元素对齐方式，</span></span><br><span class="line"><span class="comment">%left-l,right-r,center-c，表示中的“|”表示绘制列线，如果不绘制列线则可以使用&#123;cccc&#125;</span></span><br><span class="line"><span class="tag">\<span class="name">hline</span></span> <span class="comment">%表示绘制一条行线</span></span><br><span class="line">函数 &amp;内容1 &amp;内容2 &amp;内容3<span class="tag">\<span class="name">\</span></span> <span class="comment">%表示一行的结束</span></span><br><span class="line"><span class="tag">\<span class="name">hline</span></span>  <span class="comment">% \hline 在此行下面画一横线</span></span><br><span class="line">f(x) &amp;A &amp;B &amp;C<span class="tag">\<span class="name">\</span></span>         <span class="comment">% \\ 表示重新开始一行</span></span><br><span class="line">g(x) &amp;A &amp;B &amp;C<span class="tag">\<span class="name">\</span></span>        <span class="comment">% &amp; 表示列的分隔线</span></span><br><span class="line">h(x) &amp;A &amp;B &amp;C<span class="tag">\<span class="name">\</span></span> </span><br><span class="line"><span class="tag">\<span class="name">hline</span></span></span><br><span class="line"><span class="tag">\<span class="name">end</span><span class="string">&#123;tabular&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">caption</span><span class="string">&#123;xxxxxxxxxxxxxx&#125;</span></span> <span class="comment">%此处为表格标题</span></span><br><span class="line"><span class="tag">\<span class="name">end</span><span class="string">&#123;table&#125;</span></span></span><br><span class="line"><span class="comment">%表格结束</span></span><br><span class="line"><span class="tag">\<span class="name">end</span><span class="string">&#123;document&#125;</span></span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/25/LaTeX中加入表格的方法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/21/Motion-Capture-System-的使用方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1459,7 +1618,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1470,7 +1629,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1481,7 +1640,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

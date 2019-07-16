@@ -317,6 +317,195 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/正则表达式初步/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Pjskd1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Pjskd1's LOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/07/16/正则表达式初步/" itemprop="url">
+                  正则表达式初步
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-16T17:00:52+09:00">
+                2019-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据分析/" itemprop="url" rel="index">
+                    <span itemprop="name">数据分析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/07/16/正则表达式初步/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/07/16/正则表达式初步/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><h3 id="原子"><a href="#原子" class="headerlink" title="原子"></a>原子</h3><p>正则表达式最基础的组成单位，每个正则表达式至少包含一个原子。常见的原子类型有：</p>
+<ul>
+<li>普通字符</li>
+<li>非打印字符（换行符\n， tab\t）</li>
+<li>通用字符（<code>\w</code>用来匹配任意的一个字母数组下划线，<code>\d</code>用来匹配任意一个十进制数，<code>\s</code>用来匹配任意一个空白字符，<code>\W</code>用来匹配与<code>\w</code>互补的字符，<code>\D</code>与 <code>\S</code>也同样是<code>\d</code>与<code>\s</code>取非）</li>
+<li>原子表（定义一组平等的原子，例如<code>[jst]</code>，在应用的时候可以像<code>pattern = &#39;pyth[jst]n&#39;</code>一样使用）</li>
+</ul>
+<p><code>re.search(规则，对象)</code>是从内容中按照规定的规则搜索内容的函数。</p>
+<h3 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h3><p>正则表达式中具有一些特殊含义的字符。</p>
+<ol>
+<li><code>.</code>：用来匹配任意一个字符</li>
+<li><code>^</code>：用来匹配字符串开始的位置，另如<code>[^]</code>这样的括号中的<code>^</code>表示的是取非运算</li>
+<li><code>$</code>：用来匹配字符串结束的位置</li>
+<li><code>*</code>：用来匹配零次一次以及多次其之前的原子，例如<code>&#39;s*&#39;</code></li>
+<li><code>?</code>：用来匹配零次或者一次其之前的原子，例如<code>&#39;s?&#39;</code></li>
+<li><code>+</code>：用来匹配一次或者多次其之前的原子，例如<code>&#39;s+&#39;</code></li>
+<li><code>{3}</code>：前面的原子恰好出现3次，例如<code>&#39;t{3}&#39;</code>，如果打括号内有逗号，例如<code>&#39;t{3,}&#39;</code>，则表示前面的原子至少出现了3次。如果是<code>&#39;t{3,7}&#39;</code>则表示至少出现3次，至多出现7次</li>
+<li><code>|</code>：模式选择符或</li>
+<li><code>()</code>：（组合），匹配括号内的任意正则表达式，并标识出组合的开始和结尾。匹配完成后，组合的内容可以被获取</li>
+</ol>
+<h3 id="模式修正符"><a href="#模式修正符" class="headerlink" title="模式修正符"></a>模式修正符</h3><p>模式修正符，即可以在补发彼岸正则表达式的情况下，通过模式修正符改变正则表达式的含义，从而实现一些匹配结果的调整等功能。</p>
+<ol>
+<li><code>re.I</code>：忽略大小写</li>
+<li><code>re.M</code>：多行匹配</li>
+<li><code>re.L</code>：本地化识别匹配</li>
+<li><code>re.U</code>：根据Unicode字符解析</li>
+<li><code>re.S</code>：使<code>.</code>也能够匹配换行符</li>
+</ol>
+<h3 id="贪婪模式和懒惰模式"><a href="#贪婪模式和懒惰模式" class="headerlink" title="贪婪模式和懒惰模式"></a>贪婪模式和懒惰模式</h3><p>贪婪模式的核心是尽可能多的去匹配，懒惰模式的核心则是尽可能少的去匹配。</p>
+<p>例如贪婪模式有<code>pat1 = &#39;p.*y&#39;   #greedy</code>，而懒惰模式则为<code>pat2 = &#39;p.*?y&#39;  #lazzy</code>。</p>
+<h3 id="正则表达式函数"><a href="#正则表达式函数" class="headerlink" title="正则表达式函数"></a>正则表达式函数</h3><p>正则表达式函数有<code>re.match()</code>函数，<code>re.search()</code>函数，<code>re.fullmatch()</code>函数和<code>re.sub()</code>函数等等。</p>
+<p><code>re.search()</code>：扫描整个字符串找到匹配样式的第一个位置，并返回一个相应的匹配。如果没有匹配，就返回一个 <code>None</code>。</p>
+<p><code>re.match()</code>：如果 <em>string</em> 开始的0或者多个字符匹配到了正则表达式样式，就返回一个相应的匹配对象。如果没有匹配，就返回一个 <code>None</code>。</p>
+<p><code>re.fullmatch()</code>：如果整个 <em>string</em> 匹配到正则表达式样式，就返回一个相应的匹配对象。如果没有匹配，就返回一个 <code>None</code>。使用的时候例如<code>re.compile(pattern).findall()</code>。</p>
+<h2 id="利用正则表达式的爬虫小例子"><a href="#利用正则表达式的爬虫小例子" class="headerlink" title="利用正则表达式的爬虫小例子"></a>利用正则表达式的爬虫小例子</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import re</span><br><span class="line">import urllib.request</span><br><span class="line"></span><br><span class="line">pattern = &apos;&lt;div class=&quot;cm-body&quot;&gt;&lt;div class=&quot;name&quot;&gt;(.*?)&lt;/div&gt;&lt;div class=&quot;works-num&quot;&gt;&apos;</span><br><span class="line">data = urllib.request.urlopen(&apos;https://read.douban.com/provider/all&apos;).read()</span><br><span class="line">data = data.decode(&apos;utf-8&apos;)</span><br><span class="line">mydata = re.compile(pattern).findall(data)</span><br><span class="line">fp = open(&apos;publisher.txt&apos;, &apos;w&apos;)</span><br><span class="line">for item in mydata:</span><br><span class="line">    fp.write(item+&apos;\n&apos;)</span><br></pre></td></tr></table></figure>
+<p>这个例子可以将网站中的所有出版社爬下来并保存到文件中。正则表达式中<code>.*?</code>的作用是使用懒惰模式来匹配任意字符。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/06/广度优先搜索/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1756,165 +1945,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/13/奇异值分解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Pjskd1">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Pjskd1's LOG">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/03/13/奇异值分解/" itemprop="url">
-                  奇异值分解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-13T14:35:36+09:00">
-                2019-03-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Math/" itemprop="url" rel="index">
-                    <span itemprop="name">Math</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/03/13/奇异值分解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2019/03/13/奇异值分解/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="奇异值分解简介"><a href="#奇异值分解简介" class="headerlink" title="奇异值分解简介"></a>奇异值分解简介</h2><p>$$<br>A=U \Sigma V^{T}<br>$$</p>
-<p>此处，$U=\left(u_{i j}\right)_{m \times m}, \Sigma=\left(\sigma_{i j}\right)_{m \times n}, V^{T}=\left(v_{i j}\right)_{n \times n}​$，其中方阵U和V都是实正交矩阵（orthogonal matrix），也就是说，$U^T = U^{-1}, V^T=V^{-1}​$， $\Sigma​$是类对角矩阵，如下<br>$$<br>\begin{align}<br>\Sigma=<br>\begin{bmatrix}<br>{\sigma_{1}} &amp; {0} &amp; {0} &amp; {0} &amp; {\cdots} &amp; {0}\\<br>{0} &amp; {\ddots} &amp; {0} &amp; {\vdots} &amp; {\cdots} &amp; {0}\\<br>{0} &amp; {0} &amp; {\sigma_{r}} &amp; {0} &amp; {\cdots} &amp; {0}\\<br>{0} &amp; {\cdots} &amp; {0} &amp; {0} &amp; {\cdots} &amp; {0}\\<br>{\vdots} &amp; {\ddots} &amp; {\vdots} &amp; {\vdots} &amp; {\ddots} &amp; {\vdots}\\<br>{0} &amp; {\cdots} &amp; {0} &amp; {0} &amp; {\cdots} &amp; {0}<br>\end{bmatrix}<br>\end{align}<br>$$<br>主对角元$\sigma_{i}&gt;0, \quad i=1,2, \ldots, r$，且$\sigma_{r+1}=\cdots \sigma_{p}=0, \quad p=\min \{m, n\}$，称为奇异值（singular values）。注意，SVD的分解不具有唯一性。为了便于应用，我们习惯将奇异值由大到小排列：$\sigma_{1} \geq \sigma_{2} \geq \cdots \geq \sigma_{r}&gt;0$。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/03/13/奇异值分解/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1964,7 +1994,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1975,7 +2005,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1986,7 +2016,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
