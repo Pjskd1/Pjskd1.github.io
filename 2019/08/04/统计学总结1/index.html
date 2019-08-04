@@ -1,0 +1,1037 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans,en,ja,default">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="xF6uYrMOkD_u5JmQ8R0Kd9-Rpim-QsToUIxGg6Jdlz0" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据分析,统计学,二项分布,泊松分布," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="记号$\mu$通常表示总体的均值，$\bar{x}$通常表示样本的均值。$\sigma^2$表示总体的方差，方差的平方根$\sigma$表示总体的标准差。 方差离散随机变量的方差公式如下：$$\operatorname{Var}(X)=\sigma^{2}=\frac{1}{N} \sum_{i=1}^{N}\left(x_{i}-\mu\right)^{2}$$但是如果总体数据太多，我们需要使用">
+<meta name="keywords" content="数据分析,统计学,二项分布,泊松分布">
+<meta property="og:type" content="article">
+<meta property="og:title" content="统计学总结1">
+<meta property="og:url" content="http://yoursite.com/2019/08/04/统计学总结1/index.html">
+<meta property="og:site_name" content="Pjskd1&#39;s LOG">
+<meta property="og:description" content="记号$\mu$通常表示总体的均值，$\bar{x}$通常表示样本的均值。$\sigma^2$表示总体的方差，方差的平方根$\sigma$表示总体的标准差。 方差离散随机变量的方差公式如下：$$\operatorname{Var}(X)=\sigma^{2}=\frac{1}{N} \sum_{i=1}^{N}\left(x_{i}-\mu\right)^{2}$$但是如果总体数据太多，我们需要使用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Binomial_Distribution.svg/500px-Binomial_Distribution.svg.png">
+<meta property="og:updated_time" content="2019-08-04T07:33:46.620Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="统计学总结1">
+<meta name="twitter:description" content="记号$\mu$通常表示总体的均值，$\bar{x}$通常表示样本的均值。$\sigma^2$表示总体的方差，方差的平方根$\sigma$表示总体的标准差。 方差离散随机变量的方差公式如下：$$\operatorname{Var}(X)=\sigma^{2}=\frac{1}{N} \sum_{i=1}^{N}\left(x_{i}-\mu\right)^{2}$$但是如果总体数据太多，我们需要使用">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Binomial_Distribution.svg/500px-Binomial_Distribution.svg.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/04/统计学总结1/"/>
+
+
+
+
+
+  <title> 统计学总结1 | Pjskd1's LOG </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-97728634-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Pjskd1's LOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">记录我的生活</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/04/统计学总结1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Pjskd1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Pjskd1's LOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                统计学总结1
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-04T16:31:37+09:00">
+                2019-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/统计学/" itemprop="url" rel="index">
+                    <span itemprop="name">统计学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/04/统计学总结1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/08/04/统计学总结1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="记号"><a href="#记号" class="headerlink" title="记号"></a>记号</h2><p>$\mu$通常表示总体的均值，$\bar{x}$通常表示样本的均值。$\sigma^2$表示总体的方差，方差的平方根$\sigma$表示总体的标准差。</p>
+<h2 id="方差"><a href="#方差" class="headerlink" title="方差"></a>方差</h2><p>离散随机变量的方差公式如下：<br>$$<br>\operatorname{Var}(X)=\sigma^{2}=\frac{1}{N} \sum_{i=1}^{N}\left(x_{i}-\mu\right)^{2}<br>$$<br>但是如果总体数据太多，我们需要使用样本方差来估计总体方差，样本方差的公式如下：<br>$$<br>s^{2}=\frac{1}{n-1} \sum_{i=1}^{n}\left(x_{i}-\overline{x}\right)^{2}<br>$$<br>这里需要注意的是，因为样本集中的样本偏差很可能变小了，样本方差总是偏向于低估总体方差，所以这里我们要除以$n+1$来略微的修正样本方差来估计总体方差。</p>
+<a id="more"></a>
+<h2 id="标准差"><a href="#标准差" class="headerlink" title="标准差"></a>标准差</h2><p>标准差总是方差的平方根，类似的我们可以得到，总体的标准差为：<br>$$<br>\sigma = \sqrt{\sigma^2}<br>$$<br>而样本的标准差为样本方差的平方根：<br>$$<br>s = \sqrt{s^2}<br>$$<br>但是需要注意的是，在方差中$s^2$是一个很好的$\sigma^2$的估计量，但是在标准差中，$s$并不$\sigma$的无偏估计量。</p>
+<p>标准差有很好的的性质，因为标准差的单位与样本的单位相同，这就给了标准差更好的解释性。</p>
+<h2 id="随机变量"><a href="#随机变量" class="headerlink" title="随机变量"></a>随机变量</h2><p>随机变量一般以大写字母表示。随机变量在不同的条件下由于偶然因素影响，其可能取各种随机变量不同的值，具有不确定性和随机性，但这些取值落在某个范围的概率是一定的，此种变量称为随机变量。<strong>随机变量可以是离散型的，也可以是连续型的。</strong></p>
+<p>随机变量是概率分布的基础。</p>
+<h2 id="概率密度函数"><a href="#概率密度函数" class="headerlink" title="概率密度函数"></a>概率密度函数</h2><p>在随机变量的基础上我们可以定义概率密度函数（Probability density function，PDF）。我们日常所说的概率的含义其实是概率密度函数下方的某个区间的面积，为了达成这个目标，我们定义概率密度函数下方的面积的和一定为1。</p>
+<p>概率密度函数与累积分布概率的关系如下：对于一维实随机变量<em>X</em>，设它的累积分布函数是$F_X(x)$。如果存在可测函数$f_X(x)$，满足：<br>$$<br>\forall-\infty&lt;a&lt;\infty, \quad F_{X}(a)=\int_{-\infty}^{a} f_{X}(x) d x<br>$$<br>那么<em>X</em> 是一个连续型随机变量，并且$f_X(x)$是它的概率密度函数。这个公式同样适用于离散的情况，只不过需要将积分改成求和的形式。</p>
+<h2 id="期望值"><a href="#期望值" class="headerlink" title="期望值"></a>期望值</h2><p>期望值通常使用$E(X)$来表示，在概率论和统计学中，一个离散性随机变量的期望是试验中每次可能的结果乘以其结果概率的总和。换句话来说期望值就是该变量输出值的加权平均。那么离散随机变量的期望公式为：<br>$$<br>\mathrm{E}(X)=\sum_{i} p_{i} x_{i}<br>$$<br>其中$x_i$为离散变量X可能的取值，$p_i$为离散变量X取值为$x_i$的概率。相似的，连续随机变量的期望的公式如下：<br>$$<br>\mathrm{E}(X)=\int_{-\infty}^{\infty} x f(x) \mathrm{d} x<br>$$<br>期望有以下性质：</p>
+<ul>
+<li>期望值E是线性函数：</li>
+</ul>
+<p>$$<br>\mathrm{E}(a X+b Y)=a \mathrm{E}(X)+b \mathrm{E}(Y)<br>$$</p>
+<ul>
+<li>在<strong>一般情况下</strong>，两个随机变量的<strong>积的期望值不等于这两个随机变量的期望值的积</strong>。只有在一种情况下成立，就是这两个随机变量的协方差为0，也就是说这两个变量不相关，这是我们可以使用公式：</li>
+</ul>
+<p>$$<br>  \mathrm{E}(X Y)=\mathrm{E}(X) \mathrm{E}(Y)<br>$$</p>
+<ul>
+<li>我们还可以通过期望值来求变量的方差：</li>
+</ul>
+<p>$$<br>\operatorname{Var}(X)=\mathrm{E}\left(X^{2}\right)-\mathrm{E}(X)^{2}<br>$$</p>
+<h2 id="二项分布（Binomial-distribution）"><a href="#二项分布（Binomial-distribution）" class="headerlink" title="二项分布（Binomial distribution）"></a>二项分布（Binomial distribution）</h2><p>在概率论和统计学中，二项分布（Binomial distribution）是n个独立的是/非试验中成功的次数的离散概率分布，其中每次试验的成功概率为$p$。</p>
+<p>一般的，如果随机变量X服从参数为n和p的二项分布，我们记$X \sim B(n, p)$。而n次试验中正好得到k次成功的概率由一下公式给出：<br>$$<br>f(k ; n, p)=\operatorname{Pr}(X=k)= \mathrm{C}^n_k p^{k}(1-p)^{n-k}<br>$$<br>为了有一个感性的认识，下面是一幅$n=6, p=0.5$时的二项分布以及其正态近似。（图片出自wikipedia）</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Binomial_Distribution.svg/500px-Binomial_Distribution.svg.png" alt=""></p>
+<h3 id="二项分布的期望值与方差"><a href="#二项分布的期望值与方差" class="headerlink" title="二项分布的期望值与方差"></a>二项分布的期望值与方差</h3><p>如果$X \sim B(n, p)$（也就是说，X是服从二项分布的随机变量），那么X的期望值为<br>$$<br>\mathrm{E}[X]=n p<br>$$<br>方差为：<br>$$<br>\operatorname{Var}[X]=n p(1-p)<br>$$</p>
+<h3 id="二项分布与正态分布的关系"><a href="#二项分布与正态分布的关系" class="headerlink" title="二项分布与正态分布的关系"></a>二项分布与正态分布的关系</h3><p>如果n足够大，那么分布的偏度就比较小。在这种情况下，如果使用<strong>连续性矫正</strong>，那么二项分布$B(n, p)$有很好的近似正态分布$\mathcal{N}(np, npq)$。这种近似应该在$n &gt; 20$的情况下使用，n越大近似越好，另外p不接近0或者1时更好。另外在做这种近似的时候我们希望$np&gt;5$并且$npq&gt;5$。</p>
+<h2 id="泊松分布（Poisson-distribution）"><a href="#泊松分布（Poisson-distribution）" class="headerlink" title="泊松分布（Poisson distribution）"></a>泊松分布（Poisson distribution）</h2><p>泊松分布适合于描述单位时间内随机事件发生的次数的概率分布。如某一服务设施在一定时间内受到的服务请求的次数，电话交换机接到呼叫的次数、汽车站台的候客人数、机器出现的故障数、自然灾害发生的次数等等。</p>
+<p>我们先定义随机变量X，若变量X服从参数为$\lambda$的泊松分布，我们记为$X\sim \mathrm{P}(\lambda)$，这个泊松分布的累积概率函数（概率质量函数）为：<br>$$<br>P(X=k)=\frac{e^{-\lambda} \lambda^{k}}{k !}<br>$$<br>泊松分布的参数$\lambda$是单位时间（或单位面积）内随机事件的平均发生率。</p>
+<h3 id="泊松分布的性质："><a href="#泊松分布的性质：" class="headerlink" title="泊松分布的性质："></a>泊松分布的性质：</h3><ul>
+<li>泊松分布的期望与方差都相同，为其参数$\lambda$：</li>
+</ul>
+<p>$$<br>E(X)=V(X)=\lambda<br>$$</p>
+<ul>
+<li>两个独立且服从泊松分布的随机变量，其和仍然服从泊松分布：</li>
+</ul>
+<p>$$<br>X+Y \sim \mathrm{P}\left(\lambda_{1}+\lambda_{2}\right)<br>$$</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据分析/" rel="tag"># 数据分析</a>
+          
+            <a href="/tags/统计学/" rel="tag"># 统计学</a>
+          
+            <a href="/tags/二项分布/" rel="tag"># 二项分布</a>
+          
+            <a href="/tags/泊松分布/" rel="tag"># 泊松分布</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/19/50道经典SQL练习题及答案/" rel="next" title="50道经典SQL练习题及答案">
+                <i class="fa fa-chevron-left"></i> 50道经典SQL练习题及答案
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Pjskd1" />
+          <p class="site-author-name" itemprop="name">Pjskd1</p>
+           
+              <p class="site-description motion-element" itemprop="description">瞎写</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Pjskd1" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/profile.php?id=100015773921039" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.weibo.com/u/2743249160?is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#记号"><span class="nav-number">1.</span> <span class="nav-text">记号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方差"><span class="nav-number">2.</span> <span class="nav-text">方差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准差"><span class="nav-number">3.</span> <span class="nav-text">标准差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机变量"><span class="nav-number">4.</span> <span class="nav-text">随机变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概率密度函数"><span class="nav-number">5.</span> <span class="nav-text">概率密度函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#期望值"><span class="nav-number">6.</span> <span class="nav-text">期望值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二项分布（Binomial-distribution）"><span class="nav-number">7.</span> <span class="nav-text">二项分布（Binomial distribution）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二项分布的期望值与方差"><span class="nav-number">7.1.</span> <span class="nav-text">二项分布的期望值与方差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二项分布与正态分布的关系"><span class="nav-number">7.2.</span> <span class="nav-text">二项分布与正态分布的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泊松分布（Poisson-distribution）"><span class="nav-number">8.</span> <span class="nav-text">泊松分布（Poisson distribution）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#泊松分布的性质："><span class="nav-number">8.1.</span> <span class="nav-text">泊松分布的性质：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2017 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Pjskd1</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://https-pjskd1-github-io.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/08/04/统计学总结1/';
+          this.page.identifier = '2019/08/04/统计学总结1/';
+          this.page.title = '统计学总结1';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://https-pjskd1-github-io.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
